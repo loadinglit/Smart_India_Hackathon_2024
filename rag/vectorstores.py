@@ -2,6 +2,7 @@ import tiktoken
 from rag.settings import logger
 from rag.settings import logger
 from rag.database import DatabaseConnector
+from pymongo.operations import SearchIndexModel
 from llama_index.core.callbacks import TokenCountingHandler
 from llama_index.core import ( VectorStoreIndex, StorageContext )
 from llama_index.vector_stores.mongodb import MongoDBAtlasVectorSearch
@@ -27,6 +28,36 @@ class VectorStoreManager:
         # self.token_counter = TokenCountingHandler(
         #     tokenizer=tiktoken.encoding_for_model("gpt-4o").encode
         # )
+
+    def create_vector_store_index(self, name: str) -> SearchIndexModel:
+        """
+        Creates a vector search index for a vector store in MongoDB Atlas.
+
+        Returns
+        -------
+        SearchIndexModel
+            The created search index model.
+        """
+        search_index_model = SearchIndexModel(
+        definition={
+            "fields": [
+                {
+                    "type": "vector",
+                    "path": "embedding",
+                    "numDimensions": 1536,
+                    "similarity": "cosine"
+                },
+                {
+                    "type": "filter",
+                    "path": "metadata.page_label"
+                }
+            ]
+            },
+        name=name,
+        type="vectorSearch",
+        )
+
+        return search_index_model
 
     def create_vector_store(
         self, db_name: str, collection_name: str, index_name: str, documents: list

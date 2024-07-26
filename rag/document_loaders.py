@@ -42,7 +42,7 @@ class DocumentLoader:
             raise
 
     @staticmethod
-    def load_documents_from_s3(bucket_name: str, directory: str, key: str, secret: str):
+    def load_documents_from_s3(bucket_name: str, directory: str):
         """
         Loads documents from an S3 bucket.
 
