@@ -37,7 +37,17 @@ class DatabaseConnector:
 
     def connect_mongodb(self, URI: str):
         """
-        Connects to MongoDB using the connection string from Secrets.
+        Connects to MongoDB using the provided URI.
+
+        Parameters
+        ----------
+        URI : str
+            The connection string for MongoDB.
+
+        Raises
+        ------
+        pymongo.errors.ConnectionFailure
+            If there is an error connecting to MongoDB.
         """
         try:
             self.client = pymongo.MongoClient(URI)
@@ -49,6 +59,11 @@ class DatabaseConnector:
     # def connect_sql(self):
     #     """
     #     Connects to SQL database using the connection string from Secrets.
+
+    #     Raises
+    #     ------
+    #     sqlalchemy.exc.OperationalError
+    #         If there is an error connecting to the SQL database.
     #     """
     #     try:
     #         engine = sqlalchemy.create_engine(Secrets.SQL_CONNECTION_STRING)

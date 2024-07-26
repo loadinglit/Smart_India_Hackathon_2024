@@ -10,14 +10,26 @@ from langchain_community.callbacks import get_openai_callback
 from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.core.storage.chat_store import SimpleChatStore
 
-
 class ChatService:
     def __init__(self):
         self.chat_store = SimpleChatStore()
         self.prompts = Prompts()
         self.models = Models()
 
-    def initialize_chat_store(self):
+    def _initialize_chat_store(self):
+        """
+        Initializes the chat store.
+
+        Returns
+        -------
+        SimpleChatStore
+            The initialized chat store.
+        
+        Raises
+        ------
+        Exception
+            If there is an error initializing the chat store.
+        """
         try:
             chat_store = SimpleChatStore()
             logger.info("Chat store initialized successfully")
@@ -25,7 +37,7 @@ class ChatService:
         except Exception as e:
             logger.error(f"Error initializing chat store: {e}")
             raise
-    
+
     def chat(
         self,
         user_query: str,
@@ -34,6 +46,32 @@ class ChatService:
         collection_name: str,
         index_name: str,
     ):
+        """
+        Processes a user query and returns a response.
+
+        Parameters
+        ----------
+        user_query : str
+            The query from the user.
+        user_ip : str
+            The IP address of the user.
+        db_name : str
+            The name of the database.
+        collection_name : str
+            The name of the collection.
+        index_name : str
+            The name of the index.
+
+        Returns
+        -------
+        dict
+            A dictionary containing the response and source documents.
+
+        Raises
+        ------
+        Exception
+            If there is an error processing the query.
+        """
         try:
             warnings.filterwarnings("ignore")
             chat_memory = ChatMemoryBuffer.from_defaults(
@@ -47,7 +85,7 @@ class ChatService:
             )
 
             vector_store_manager = VectorStoreManager(URI=Secrets.ATLAS_CONNECTION_STRING)
-            index = vector_store_manager.get_vector_store(
+            index = vector_store_manager._get_vector_store(
                 db_name, collection_name, index_name
             )
 

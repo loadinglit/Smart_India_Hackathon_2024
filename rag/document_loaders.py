@@ -9,14 +9,14 @@ class DocumentLoader:
 
     Methods
     -------
-    load_documents_from_directory(directory_path: str)
+    load_documents_from_directory(directory_path: str) -> list
         Loads documents from a local directory.
-    load_documents_from_s3(bucket_name: str, directory: str, key: str, secret: str)
+    load_documents_from_s3(bucket_name: str, directory: str) -> list
         Loads documents from an S3 bucket.
     """
 
     @staticmethod
-    def load_documents_from_directory(directory_path: str):
+    def load_documents_from_directory(directory_path: str) -> list:
         """
         Loads documents from a local directory.
 
@@ -29,10 +29,18 @@ class DocumentLoader:
         -------
         list
             A list of loaded documents.
+
+        Raises
+        ------
+        ValueError
+            If the directory path is not provided.
+        Exception
+            If there is an error loading documents from the directory.
         """
+        if not directory_path:
+            raise ValueError("Directory path must be provided.")
+
         try:
-            if not directory_path:
-                raise ValueError("Directory path must be provided.")
             reader = SimpleDirectoryReader(directory_path)
             documents = reader.load()
             logger.info(f"Loaded {len(documents)} documents from {directory_path}")
@@ -42,7 +50,7 @@ class DocumentLoader:
             raise
 
     @staticmethod
-    def load_documents_from_s3(bucket_name: str, directory: str):
+    def load_documents_from_s3(bucket_name: str, directory: str) -> list:
         """
         Loads documents from an S3 bucket.
 
@@ -52,16 +60,22 @@ class DocumentLoader:
             The name of the S3 bucket.
         directory : str
             The directory within the S3 bucket.
-        key : str
-            The AWS access key.
-        secret : str
-            The AWS secret access key.
 
         Returns
         -------
         list
             A list of loaded documents.
+
+        Raises
+        ------
+        ValueError
+            If the bucket name or directory is not provided.
+        Exception
+            If there is an error loading documents from S3.
         """
+        if not bucket_name or not directory:
+            raise ValueError("Both bucket name and directory must be provided.")
+
         try:
             reader = S3Reader(
                 bucket=f"{bucket_name}/{directory}",
