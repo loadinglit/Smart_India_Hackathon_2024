@@ -31,7 +31,7 @@ class VectorStoreManager:
 
     delete_document(db_name: str, collection_name: str, file_name: str)
         Deletes a single document from an existing vector store from the database.
-        
+
     update_document(db_name: str, collection_name: str, file_name: str, document: list)
         Updates a single document in an existing vector store in the database.
     
@@ -209,7 +209,7 @@ class VectorStoreManager:
             logger.error(f"Error retrieving vector store: {e}")
             raise
 
-    def delete_vector_store(self, db_name: str, collection_name: str):
+    def delete_collection(self, db_name: str, collection_name: str):
         """
         Deletes an existing vector store from MongoDB Atlas.
 
