@@ -44,7 +44,6 @@ class ChatService:
         user_ip: str,
         db_name: str,
         collection_name: str,
-        index_name: str,
     ):
         """
         Processes a user query and returns a response.
@@ -59,8 +58,6 @@ class ChatService:
             The name of the database.
         collection_name : str
             The name of the collection.
-        index_name : str
-            The name of the index.
 
         Returns
         -------
@@ -83,10 +80,10 @@ class ChatService:
             text_qa_template = ChatPromptTemplate.from_messages(
                 self.prompts.get_chat_text_qa_msgs()
             )
-
+            
             vector_store_manager = VectorStoreManager(URI=Secrets.ATLAS_CONNECTION_STRING)
             index = vector_store_manager._get_vector_store(
-                db_name, collection_name, index_name
+                db_name, collection_name, collection_name
             )
 
             with get_openai_callback() as cb:

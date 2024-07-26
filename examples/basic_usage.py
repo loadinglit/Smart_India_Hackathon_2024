@@ -16,15 +16,14 @@ def main():
 
     db_name = "your_database_name"
     collection_name = "your_collection_name"
-    index_name = "your_index_name"
-    vector_store_index = vector_store_manager.create_vector_store(db_name, collection_name, index_name, documents)
+    vector_store_index = vector_store_manager.create_vector_store(db_name, collection_name, documents)
 
     chat_service = ChatService()
 
     user_query = "What is the process for onboarding new employees?"
     user_ip = "192.168.1.1"  
 
-    response = chat_service.chat(user_query, user_ip, db_name, collection_name, index_name)
+    response = chat_service.chat(user_query, user_ip, db_name, collection_name)
 
     print("Response:", response["response"])
     print("Source Documents:", response["source_documents"])

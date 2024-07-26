@@ -15,9 +15,6 @@ class VectorStoreManager:
     create_vector_store_index(name: str) -> SearchIndexModel
         Creates a vector search index for a vector store in MongoDB Atlas.
 
-    create_vector_store(db_name: str, collection_name: str, index_name: str, documents: list) -> VectorStoreIndex
-        Creates a vector store from a list of documents.
-
     add_to_vector_store(db_name: str, collection_name: str, index_name: str, documents: list) -> VectorStoreIndex
         Adds documents to an existing vector store in the database.
 
@@ -41,7 +38,7 @@ class VectorStoreManager:
         db = DatabaseConnector("mongodb", URI)
         self.client = db.client
 
-    def create_vector_store_index(self, name: str) -> SearchIndexModel:
+    def _create_vector_store_index(self, name: str) -> SearchIndexModel:
         """
         Creates a vector search index for a vector store in MongoDB Atlas.
 
@@ -52,7 +49,9 @@ class VectorStoreManager:
         """
         search_index_model = SearchIndexModel(
             definition={
-                "fields": [
+               "mappings": {
+                   "dynamic": True,
+                    "fields": [
                     {
                         "type": "vector",
                         "path": "embedding",
@@ -64,13 +63,14 @@ class VectorStoreManager:
                         "path": "metadata.page_label"
                     }
                 ]
+               }
             },
             name=name,
             type="vectorSearch",
         )
         return search_index_model
 
-    def create_vector_store(self, db_name: str, collection_name: str, index_name: str, documents: list) -> VectorStoreIndex:
+    def create_vector_store(self, db_name: str, collection_name: str, documents: list) -> VectorStoreIndex:
         """
         Creates a vector store in MongoDB Atlas from a list of documents.
 
@@ -80,8 +80,6 @@ class VectorStoreManager:
             The name of the database.
         collection_name : str
             The name of the collection.
-        index_name : str
-            The name of the index.
         documents : list
             A list of documents to index.
 
@@ -99,13 +97,14 @@ class VectorStoreManager:
         """
         if not documents:
             raise ValueError("The documents list cannot be empty.")
-
+        
         try:
+            index_name = self._create_vector_store_index(collection_name)
             atlas_vector_search = MongoDBAtlasVectorSearch(
                 self.client,
                 db_name=db_name,
                 collection_name=collection_name,
-                index_name=index_name,
+                vector_index_name=index_name,
             )
             vector_store_context = StorageContext.from_defaults(
                 vector_store=atlas_vector_search
@@ -119,7 +118,7 @@ class VectorStoreManager:
             logger.error(f"Error creating vector store: {e}")
             raise
 
-    def add_to_vector_store(self, db_name: str, collection_name: str, index_name: str, documents: list) -> VectorStoreIndex:
+    def add_to_vector_store(self, db_name: str, collection_name: str, documents: list) -> VectorStoreIndex:
         """
         Adds documents to an existing vector store in MongoDB Atlas.
 
@@ -129,8 +128,6 @@ class VectorStoreManager:
             The name of the database.
         collection_name : str
             The name of the collection.
-        index_name : str
-            The name of the index.
         documents : list
             A list of documents to index.
 
@@ -154,7 +151,7 @@ class VectorStoreManager:
                 self.client,
                 db_name=db_name,
                 collection_name=collection_name,
-                index_name=index_name,
+                vector_index_name=collection_name,
             )
             vector_store_context = StorageContext.from_defaults(
                 vector_store=atlas_vector_search
@@ -167,7 +164,7 @@ class VectorStoreManager:
             logger.error(f"Error adding documents: {e}")
             raise
 
-    def _get_vector_store(self, db_name: str, collection_name: str, index_name: str) -> VectorStoreIndex:
+    def _get_vector_store(self, db_name: str, collection_name: str) -> VectorStoreIndex:
         """
         Retrieves an existing vector store from MongoDB Atlas.
 
@@ -195,7 +192,7 @@ class VectorStoreManager:
                 self.client,
                 db_name=db_name,
                 collection_name=collection_name,
-                index_name=index_name,
+                index_name=collection_name,
             )
             vector_store_index = VectorStoreIndex.from_vector_store(
                 atlas_vector_search
