@@ -1,9 +1,15 @@
 import os
 import openai
+from enum import Enum
 from rag.settings import logger
 from rag.secrets import Secrets
 from llama_index.core import Settings
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
+
+class LiteLLMModels(Enum):
+    GEMMA_2_27B_IT = "google/gemma-2-27b-it"
+    META_LLAMA_3_8B = "solidrust/Meta-Llama-3-8B-Instruct-hf-AWQ"
+    PHI_3_MINI = "microsoft/Phi-3-mini-4k-instruct"
 
 class Models:
     """
@@ -15,6 +21,8 @@ class Models:
         An instance of the AzureChatOpenAI model.
     embed_model : AzureOpenAIEmbeddings
         An instance of the AzureOpenAIEmbeddings model.
+    litellm : OpenAI
+        An instance of models hosted using LiteLLM.
     """
 
     def __init__(self):
@@ -38,37 +46,9 @@ class Models:
             openai_api_key=Secrets.ADA_API_KEY,
         )
         logger.info(f"Azure {Secrets.ADA_MODEL} initialized")
-        
-        Settings.llm = self.azure_llm
-        Settings.embed_model = self.embed_model
-        os.environ["ALLOW_RESET"] = "TRUE"
 
         self.lite_llm = openai.OpenAI(
             api_key=Secrets.LITELLM_KEY, 
             base_url=Secrets.LITELLM_BASE_URL
         )
         logger.info("LiteLLM initialized")
-
-    def ask_litellm(self, query: str) -> dict:
-        """
-        Queries the LiteLLM model with a given query.
-
-        Parameters
-        ----------
-        query : str
-            The query to send to the LiteLLM model.
-
-        Returns
-        -------
-        dict
-            A dictionary containing the response, usage, and model information.
-        """
-        messages = [{"role": "user", "content": query}]
-        response = self.lite_llm.chat.completions.create(
-            model="google/gemma-2-27b-it", messages=messages
-        )
-        return {
-            "response": response.choices[0].message.content,
-            "usage": response.usage,
-            "model": response.model,
-        }

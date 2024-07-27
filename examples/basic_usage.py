@@ -1,6 +1,7 @@
 import os
 from rag.secrets import Secrets
 from rag.chat import ChatService
+from rag.models import LiteLLMModels
 from rag.document_loaders import DocumentLoader
 from rag.vectorstores import VectorStoreManager
 
@@ -24,6 +25,10 @@ def main():
     user_ip = "192.168.1.1"  
 
     response = chat_service.chat(user_query, user_ip, db_name, collection_name)
+
+
+    response_from_custom_model = chat_service.ask_litellm("Hi", model=LiteLLMModels.PHI_3_MINI)
+
 
     print("Response:", response["response"])
     print("Source Documents:", response["source_documents"])

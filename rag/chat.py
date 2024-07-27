@@ -1,8 +1,12 @@
+import os
 import warnings
+from typing import Union
 from rag.models import Models
 from rag.settings import logger
 from rag.prompts import Prompts
 from rag.secrets import Secrets
+from rag.models import LiteLLMModels
+from llama_index.core import Settings
 from llama_index.core import ChatPromptTemplate
 from rag.vectorstores import VectorStoreManager
 from llama_index.core.memory import ChatMemoryBuffer
@@ -15,6 +19,9 @@ class ChatService:
         self.chat_store = SimpleChatStore()
         self.prompts = Prompts()
         self.models = Models()
+        Settings.llm = self.models.azure_llm
+        Settings.embed_model = self.models.embed_model
+        os.environ["ALLOW_RESET"] = "TRUE"
 
     def _initialize_chat_store(self):
         """
@@ -37,6 +44,36 @@ class ChatService:
         except Exception as e:
             logger.error(f"Error initializing chat store: {e}")
             raise
+
+    def ask_litellm(self, query: str, model: Union[LiteLLMModels, str] = LiteLLMModels.GEMMA_2_27B_IT) -> dict:
+        """
+        Queries the LiteLLM model with a given query and model.
+
+        Parameters
+        ----------
+        query : str
+            The query to send to the LiteLLM model.
+        model : LiteLLMModel or str
+            The model to use for the query. Default is LiteLLMModel.GEMMA_2_27B_IT.
+
+        Returns
+        -------
+        dict
+            A dictionary containing the response, usage, and model information.
+        """
+        if isinstance(model, LiteLLMModels):
+            model = model.value
+
+        messages = [{"role": "user", "content": query}]
+        response = self.models.lite_llm.chat.completions.create(
+            model=model, messages=messages
+        )
+        return {
+            "response": response.choices[0].message.content,
+            "usage": response.usage,
+            "model": response.model,
+        }
+    
 
     def chat(
         self,

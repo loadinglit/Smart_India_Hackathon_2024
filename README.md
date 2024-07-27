@@ -81,6 +81,7 @@ vector = VectorStoreManager(Secrets.ATLAS_CONNECTION_STRING)
 vector.delete_collection(db_name, collection_name)
 ```
 ### To use ChatService:
+#### Using default model:
 ```python
 from rag.chat import ChatService
 
@@ -93,4 +94,17 @@ response = chat_service.chat(
     collection_name,
 )
 print(response)
+```
+#### Using custom models:
+As of now it supports two models:
+- google/gemma-2-27b-it
+- microsoft/Phi-3-mini-4k-instruct
+
+```python
+from rag.chat import ChatService
+from rag.models import LiteLLMModels
+
+chat_service = ChatService()
+
+response = chat_service.ask_litellm("Hi", model=LiteLLMModels.PHI_3_MINI)
 ```
