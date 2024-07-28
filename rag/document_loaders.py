@@ -42,7 +42,7 @@ class DocumentLoader:
 
         try:
             reader = SimpleDirectoryReader(directory_path)
-            documents = reader.load()
+            documents = reader.load_data()
             logger.info(f"Loaded {len(documents)} documents from {directory_path}")
             return documents
         except Exception as e:

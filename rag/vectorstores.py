@@ -192,7 +192,7 @@ class VectorStoreManager:
                 self.client,
                 db_name=db_name,
                 collection_name=collection_name,
-                index_name=collection_name,
+                index_name=collection_name,             # Don't run this for PMS because the collection name in PMS is not equal to index_name
             )
             vector_store_index = VectorStoreIndex.from_vector_store(
                 atlas_vector_search

@@ -9,14 +9,13 @@ from rag.models import LiteLLMModels
 from llama_index.core import Settings
 from llama_index.core import ChatPromptTemplate
 from rag.vectorstores import VectorStoreManager
+from rag.custom_chat_store import MongoChatStore
 from llama_index.core.memory import ChatMemoryBuffer
 from langchain_community.callbacks import get_openai_callback
-from llama_index.core.retrievers import VectorIndexRetriever
-from llama_index.core.storage.chat_store import SimpleChatStore
 
 class ChatService:
     def __init__(self):
-        self.chat_store = SimpleChatStore()
+        self.URI = Secrets.ATLAS_CONNECTION_STRING
         self.prompts = Prompts()
         self.models = Models()
         Settings.llm = self.models.azure_llm
@@ -38,7 +37,7 @@ class ChatService:
             If there is an error initializing the chat store.
         """
         try:
-            chat_store = SimpleChatStore()
+            chat_store = MongoChatStore(self.URI, "test_chat_store")
             logger.info("Chat store initialized successfully")
             return chat_store
         except Exception as e:
@@ -110,7 +109,7 @@ class ChatService:
             warnings.filterwarnings("ignore")
             chat_memory = ChatMemoryBuffer.from_defaults(
                 token_limit=3000,
-                chat_store=self.chat_store,
+                chat_store=self._initialize_chat_store(),
                 chat_store_key=user_ip,
             )
 
@@ -120,7 +119,7 @@ class ChatService:
             
             vector_store_manager = VectorStoreManager(URI=Secrets.ATLAS_CONNECTION_STRING)
             index = vector_store_manager._get_vector_store(
-                db_name, collection_name, collection_name
+                db_name, collection_name
             )
 
             with get_openai_callback() as cb:
@@ -135,8 +134,6 @@ class ChatService:
                 logger.warning("No nodes retrieved from software manuals.")
             else:
                 logger.info(f"Retrieved {len(answer.source_nodes)} nodes for query: {user_query}")
-
-            self.chat_store.persist(persist_path="chat_store.json")
             logger.info("Query processed successfully")
             return {
                 "response": answer.response,
