@@ -7,10 +7,12 @@ from rag.prompts import Prompts
 from rag.secrets import Secrets
 from rag.models import LiteLLMModels
 from llama_index.core import Settings
+from langchain.chains import RetrievalQA
 from llama_index.core import ChatPromptTemplate
-from rag.vectorstores import VectorStoreManager
-from rag.prepare.custom_chat_store import MongoChatStore
+from langchain_core.prompts import PromptTemplate
 from llama_index.core.memory import ChatMemoryBuffer
+from rag.prepare.vectorstores import VectorStoreManager
+from rag.prepare.custom_chat_store import MongoChatStore
 from langchain_community.callbacks import get_openai_callback
 
 class ChatService:
@@ -77,9 +79,9 @@ class ChatService:
     def chat(
         self,
         user_query: str,
-        user_ip: str,
         db_name: str,
         collection_name: str,
+        user_ip: str = None,
     ):
         """
         Processes a user query and returns a response.
@@ -107,37 +109,42 @@ class ChatService:
         """
         try:
             warnings.filterwarnings("ignore")
-            chat_memory = ChatMemoryBuffer.from_defaults(
-                token_limit=3000,
-                chat_store=self._initialize_chat_store(),
-                chat_store_key=user_ip,
+            vector_store_manager = VectorStoreManager(URI=Secrets.ATLAS_CONNECTION_STRING)
+
+            vector_search = vector_store_manager._get_vector_store(db_name, collection_name)
+            
+            qa_retriever = vector_search.as_retriever(
+                search_type="similarity",
+                search_kwargs={"k": 3},
             )
 
-            text_qa_template = ChatPromptTemplate.from_messages(
-                self.prompts.get_chat_text_qa_msgs()
-            )
-            
-            vector_store_manager = VectorStoreManager(URI=Secrets.ATLAS_CONNECTION_STRING)
-            index = vector_store_manager._get_vector_store(
-                db_name, collection_name
+            # text_qa_template = ChatPromptTemplate.from_messages(
+            #     self.prompts.get_chat_text_qa_msgs()
+            # )
+
+            PROMPT = PromptTemplate(
+                template=self.prompts.lc_prompt, input_variables=["context", "question"]
             )
 
             with get_openai_callback() as cb:
-                answer = index.as_chat_engine(
-                    chat_mode="context",
-                    memory=chat_memory,
-                    system_prompt=text_qa_template,
-                ).chat(user_query)
+                qa = RetrievalQA.from_chain_type(
+                    llm=self.models.azure_llm,
+                    chain_type="stuff",
+                    retriever=qa_retriever,
+                    return_source_documents=True,
+                    chain_type_kwargs={"prompt": PROMPT},
+                )
+                docs = qa({"query": user_query})
                 logger.info(f"Total tokens used: {cb.total_tokens}")
 
-            if not answer.source_nodes:
-                logger.warning("No nodes retrieved from software manuals.")
-            else:
-                logger.info(f"Retrieved {len(answer.source_nodes)} nodes for query: {user_query}")
+            # if not answer.source_nodes:
+            #     logger.warning("No nodes retrieved from software manuals.")
+            # else:
+            #     logger.info(f"Retrieved {len(answer.source_nodes)} nodes for query: {user_query}")
             logger.info("Query processed successfully")
             return {
-                "response": answer.response,
-                "source_documents": answer.source_nodes[0].metadata["file_name"],
+                "response": docs["result"],
+                # "source_documents": answer.source_nodes[0].metadata["file_name"],
             }
         except Exception as e:
             logger.error(f"Error processing query: {e}")

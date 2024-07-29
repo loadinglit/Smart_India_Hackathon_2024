@@ -8,6 +8,7 @@ from pymongo.operations import SearchIndexModel
 from llama_index.core.callbacks import TokenCountingHandler
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.vector_stores.mongodb import MongoDBAtlasVectorSearch
+from langchain_community.vectorstores import MongoDBAtlasVectorSearch
 
 class VectorStoreManager:
     """
@@ -38,6 +39,7 @@ class VectorStoreManager:
         """
         Initializes the VectorStoreManager with a MongoDB client.
         """
+        self.URI = URI
         db = DatabaseConnector("mongodb", URI)
         self.client = db.client
         self.models = Models()
@@ -82,7 +84,7 @@ class VectorStoreManager:
         except Exception as e:
             logger.error(f"Error creating vector index: {e}")
 
-    def create_vector_store(self, db_name: str, collection_name: str, documents: list) -> VectorStoreIndex:
+    def create_vector_store(self, db_name: str, collection_name: str, documents: list) -> MongoDBAtlasVectorSearch:
         """
         Creates a vector store in MongoDB Atlas from a list of documents.
 
@@ -112,25 +114,20 @@ class VectorStoreManager:
         
         try:
             index = self._create_vector_store_index(collection_name)
-            atlas_vector_search = MongoDBAtlasVectorSearch(
-                self.client,
-                db_name=db_name,
-                collection_name=collection_name,
+            MONGODB_COLLECTION = self.client[db_name][collection_name]
+            vector_search = MongoDBAtlasVectorSearch.from_documents(
+                documents=documents,
+                embedding=self.models.embed_model,
+                collection=MONGODB_COLLECTION,
                 index_name=collection_name,
             )
-            vector_store_context = StorageContext.from_defaults(
-                vector_store=atlas_vector_search
-            )
-            vector_store_index = VectorStoreIndex.from_documents(
-                documents, storage_context=vector_store_context, show_progress=True
-            )
-            logger.info("Vector store index created successfully")
-            return vector_store_index
+            logger.info("Vector store created successfully")
+            return vector_search
         except Exception as e:
             logger.error(f"Error creating vector store: {e}")
             raise
 
-    def add_to_vector_store(self, db_name: str, collection_name: str, documents: list) -> VectorStoreIndex:
+    def add_to_vector_store(self, db_name: str, collection_name: str, documents: list):
         """
         Adds documents to an existing vector store in MongoDB Atlas.
 
@@ -159,24 +156,19 @@ class VectorStoreManager:
             raise ValueError("The documents list cannot be empty.")
 
         try:
-            atlas_vector_search = MongoDBAtlasVectorSearch(
-                self.client,
-                db_name=db_name,
-                collection_name=collection_name,
+            MONGODB_COLLECTION = self.client[db_name][collection_name]
+            vector_search = MongoDBAtlasVectorSearch.from_documents(
+                documents=documents,
+                embedding=self.models.embed_model,
+                collection=MONGODB_COLLECTION,
                 index_name=collection_name,
-            )
-            vector_store_context = StorageContext.from_defaults(
-                vector_store=atlas_vector_search
-            )
-            VectorStoreIndex.from_documents(
-                documents, storage_context=vector_store_context, show_progress=True
             )
             logger.info("Documents added successfully")
         except Exception as e:
             logger.error(f"Error adding documents: {e}")
             raise
 
-    def _get_vector_store(self, db_name: str, collection_name: str) -> VectorStoreIndex:
+    def _get_vector_store(self, db_name: str, collection_name: str) -> MongoDBAtlasVectorSearch:
         """
         Retrieves an existing vector store from MongoDB Atlas.
 
@@ -198,17 +190,14 @@ class VectorStoreManager:
             If there is an error retrieving the vector store.
         """
         try:
-            atlas_vector_search = MongoDBAtlasVectorSearch(
-                self.client,
-                db_name=db_name,
-                collection_name=collection_name,
-                index_name=collection_name,             # Don't run this for PMS because the collection name in PMS is not equal to index_name
-            )
-            vector_store_index = VectorStoreIndex.from_vector_store(
-                atlas_vector_search
+            vector_search = MongoDBAtlasVectorSearch.from_connection_string(
+                self.URI,
+                db_name + "." + collection_name,
+                self.models.embed_model,
+                index_name=collection_name,
             )
             logger.info("Vector store index retrieved successfully")
-            return vector_store_index
+            return vector_search
         except Exception as e:
             logger.error(f"Error retrieving vector store: {e}")
             raise

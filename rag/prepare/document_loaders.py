@@ -14,6 +14,14 @@ class DocumentLoader:
     load_documents_from_s3(bucket_name: str, directory: str) -> list
         Loads documents from an S3 bucket.
     """
+    @staticmethod
+    def _convert_format(documents: list) -> list:
+        lc_documents = []
+        for doc in documents:
+            lc_doc = doc.to_langchain_format()
+            lc_documents.append(lc_doc)
+        
+        return lc_documents
 
     @staticmethod
     def load_documents_from_directory(directory_path: str) -> list:
@@ -44,7 +52,8 @@ class DocumentLoader:
             reader = SimpleDirectoryReader(directory_path)
             documents = reader.load_data()
             logger.info(f"Loaded {len(documents)} documents from {directory_path}")
-            return documents
+            lc_documents = DocumentLoader._convert_format(documents)
+            return lc_documents
         except Exception as e:
             logger.error(f"Error loading documents from directory: {e}")
             raise
@@ -84,7 +93,8 @@ class DocumentLoader:
             )
             documents = reader.load_data()
             logger.info(f"Loaded {len(documents)} documents from S3 bucket {bucket_name}")
-            return documents
+            lc_documents = DocumentLoader._convert_format(documents)
+            return lc_documents
         except Exception as e:
             logger.error(f"Error loading documents from S3: {e}")
             raise
