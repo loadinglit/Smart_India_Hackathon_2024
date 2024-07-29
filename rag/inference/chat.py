@@ -9,7 +9,7 @@ from rag.models import LiteLLMModels
 from llama_index.core import Settings
 from llama_index.core import ChatPromptTemplate
 from rag.vectorstores import VectorStoreManager
-from rag.custom_chat_store import MongoChatStore
+from rag.prepare.custom_chat_store import MongoChatStore
 from llama_index.core.memory import ChatMemoryBuffer
 from langchain_community.callbacks import get_openai_callback
 

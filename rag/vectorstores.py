@@ -3,7 +3,7 @@ import tiktoken
 from rag.models import Models
 from rag.settings import logger
 from llama_index.core import Settings
-from rag.database import DatabaseConnector
+from rag.prepare.database import DatabaseConnector
 from pymongo.operations import SearchIndexModel
 from llama_index.core.callbacks import TokenCountingHandler
 from llama_index.core import VectorStoreIndex, StorageContext

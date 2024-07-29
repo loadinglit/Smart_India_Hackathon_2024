@@ -1,8 +1,8 @@
 # Import key classes/functions for easier access
 from .settings import logger
 from .secrets import Secrets
-from .database import DatabaseConnector  
-from .document_loaders import DocumentLoader
+from .prepare.database import DatabaseConnector  
+from .prepare.document_loaders import DocumentLoader
 from .vectorstores import VectorStoreManager
 from .utils import TimeConverter
 
