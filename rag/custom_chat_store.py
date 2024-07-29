@@ -1,7 +1,8 @@
-from typing import List, Optional, Any
 from pymongo import MongoClient
+from typing import List, Optional, Any
 from llama_index.core.llms import ChatMessage
 from llama_index.core.storage.chat_store.base import BaseChatStore
+from llama_index.storage.chat_store.azure import AzureChatStore
 
 
 class MongoChatStore(BaseChatStore):
@@ -14,12 +15,9 @@ class MongoChatStore(BaseChatStore):
     def __init__(self, uri: str, db_name: str):
         """Initialize MongoDB connection."""
         super().__init__(uri=uri, db_name=db_name)
-        print("Initializing MongoClient...")
         self.client = MongoClient(uri)
-        print(f"MongoClient initialized with URI: {uri}")
         self.db = self.client[db_name]
         self.collection = self.db["chat_store"]
-        print(f"Connected to database: {db_name}")
 
     @classmethod
     def class_name(cls) -> str:

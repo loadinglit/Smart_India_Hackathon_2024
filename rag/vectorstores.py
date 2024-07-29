@@ -1,5 +1,8 @@
+import os
 import tiktoken
+from rag.models import Models
 from rag.settings import logger
+from llama_index.core import Settings
 from rag.database import DatabaseConnector
 from pymongo.operations import SearchIndexModel
 from llama_index.core.callbacks import TokenCountingHandler
@@ -37,7 +40,12 @@ class VectorStoreManager:
         """
         db = DatabaseConnector("mongodb", URI)
         self.client = db.client
+        self.models = Models()
+        Settings.llm = self.models.azure_llm
+        Settings.embed_model = self.models.embed_model
+        os.environ["ALLOW_RESET"] = "TRUE"
 
+    @classmethod
     def _create_vector_store_index(self, name: str) -> SearchIndexModel:
         """
         Creates a vector search index for a vector store in MongoDB Atlas.
@@ -47,28 +55,32 @@ class VectorStoreManager:
         SearchIndexModel
             The created search index model.
         """
-        search_index_model = SearchIndexModel(
-            definition={
-               "mappings": {
-                   "dynamic": True,
-                    "fields": [
-                    {
-                        "type": "vector",
-                        "path": "embedding",
-                        "numDimensions": 1536,
-                        "similarity": "cosine"
-                    },
-                    {
-                        "type": "filter",
-                        "path": "metadata.page_label"
-                    }
-                ]
-               }
-            },
-            name=name,
-            type="vectorSearch",
-        )
-        return search_index_model
+        try:
+            search_index_model = SearchIndexModel(
+                definition={
+                "mappings": {
+                    "dynamic": True,
+                        "fields": [
+                        {
+                            "type": "vector",
+                            "path": "embedding",
+                            "numDimensions": 1536,
+                            "similarity": "cosine"
+                        },
+                        {
+                            "type": "filter",
+                            "path": "metadata.page_label"
+                        }
+                    ]
+                }
+                },
+                name=name,
+                type="vectorSearch",
+            )
+            logger.info("Vector search index created successfully.")
+            return search_index_model
+        except Exception as e:
+            logger.error(f"Error creating vector index: {e}")
 
     def create_vector_store(self, db_name: str, collection_name: str, documents: list) -> VectorStoreIndex:
         """
@@ -99,12 +111,12 @@ class VectorStoreManager:
             raise ValueError("The documents list cannot be empty.")
         
         try:
-            index_name = self._create_vector_store_index(collection_name)
+            index = self._create_vector_store_index(collection_name)
             atlas_vector_search = MongoDBAtlasVectorSearch(
                 self.client,
                 db_name=db_name,
                 collection_name=collection_name,
-                vector_index_name=index_name,
+                index_name=collection_name,
             )
             vector_store_context = StorageContext.from_defaults(
                 vector_store=atlas_vector_search
@@ -151,7 +163,7 @@ class VectorStoreManager:
                 self.client,
                 db_name=db_name,
                 collection_name=collection_name,
-                vector_index_name=collection_name,
+                index_name=collection_name,
             )
             vector_store_context = StorageContext.from_defaults(
                 vector_store=atlas_vector_search
@@ -174,8 +186,6 @@ class VectorStoreManager:
             The name of the database.
         collection_name : str
             The name of the collection.
-        index_name : str
-            The name of the index.
 
         Returns
         -------
