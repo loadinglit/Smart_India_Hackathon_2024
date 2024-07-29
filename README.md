@@ -24,18 +24,24 @@ pip install -r requirements.txt
 ```bash
 pip install -e .
 ```
+## Phases
+- Preparation Phase: Where we prepare the data, data processing/enrichment, and indexing the data. For this phase we are using LlamaIndex.
+- Inference Phase: Where user interact with the pipeline, eg. input the search query, retrieve the relevant documents, and generate the response. For this phase we are using LangChain.
+<p align="center">
+<img width="700" alt="Screenshot 2024-07-29 at 5 22 56 PM" src="https://github.com/user-attachments/assets/ffaa5bb7-60ec-4b2f-aa91-55fe1d0c29fe">
+</p>
 
 ## Example Usage
 ### Load documents from directory:
 ```python
-from rag.document_loaders import DocumentLoader
+from rag.prepare.document_loaders import DocumentLoader
 
 # document types supported: .pdf, .txt, .md, .docx, .doc
 docs = DocumentLoader.load_documents_from_directory(directory_path)
 ```
 ### Load documents from s3:
 ```python
-from rag.document_loaders import DocumentLoader
+from rag.prepare.document_loaders import DocumentLoader
 
 # document types supported: .pdf, .txt, .md, .docx, .doc
 docs = DocumentLoader.load_documents_from_s3(bucket_name, directory)
@@ -43,7 +49,7 @@ docs = DocumentLoader.load_documents_from_s3(bucket_name, directory)
 ### Store documents into MongoDB vector store:
 ```python
 from rag.secrets import Secrets
-from rag.vectorstores import VectorStoreManager
+from rag.prepare.vectorstores import VectorStoreManager
 
 vector = VectorStoreManager(Secrets.ATLAS_CONNECTION_STRING)
 vector.create_vector_store(db_name, collection_name, documents)
@@ -51,7 +57,7 @@ vector.create_vector_store(db_name, collection_name, documents)
 ### Add new documents into MongoDB vector store:
 ```python
 from rag.secrets import Secrets
-from rag.vectorstores import VectorStoreManager
+from rag.prepare.vectorstores import VectorStoreManager
 
 vector = VectorStoreManager(Secrets.ATLAS_CONNECTION_STRING)
 vector.add_to_vector_store(db_name, collection_name, documents)
@@ -59,7 +65,7 @@ vector.add_to_vector_store(db_name, collection_name, documents)
 ### Update specific document from MongoDB vector store:
 ```python
 from rag.secrets import Secrets
-from rag.vectorstores import VectorStoreManager
+from rag.prepare.vectorstores import VectorStoreManager
 
 vector = VectorStoreManager(Secrets.ATLAS_CONNECTION_STRING)
 vector.update_document(db_name, collection_name, file_name, documents)
@@ -67,7 +73,7 @@ vector.update_document(db_name, collection_name, file_name, documents)
 ### Delete specific document from MongoDB vector store:
 ```python
 from rag.secrets import Secrets
-from rag.vectorstores import VectorStoreManager
+from rag.prepare.vectorstores import VectorStoreManager
 
 vector = VectorStoreManager(Secrets.ATLAS_CONNECTION_STRING)
 vector.delete_document(db_name, collection_name, file_name)
@@ -75,7 +81,7 @@ vector.delete_document(db_name, collection_name, file_name)
 ### Delete collection from MongoDB vector store:
 ```python
 from rag.secrets import Secrets
-from rag.vectorstores import VectorStoreManager
+from rag.prepare.vectorstores import VectorStoreManager
 
 vector = VectorStoreManager(Secrets.ATLAS_CONNECTION_STRING)
 vector.delete_collection(db_name, collection_name)
@@ -83,7 +89,7 @@ vector.delete_collection(db_name, collection_name)
 ### To use ChatService:
 #### Using default model:
 ```python
-from rag.chat import ChatService
+from rag.inference.chat import ChatService
 
 chat_service = ChatService()
 
@@ -101,7 +107,7 @@ As of now it supports two models:
 - microsoft/Phi-3-mini-4k-instruct
 
 ```python
-from rag.chat import ChatService
+from rag.inference.chat import ChatService
 from rag.models import LiteLLMModels
 
 chat_service = ChatService()
