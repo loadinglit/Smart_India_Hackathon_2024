@@ -1,9 +1,9 @@
 # Import key classes/functions for easier access
 from .settings import logger
 from .secrets import Secrets
-from .prepare.database import DatabaseConnector  
-from .prepare.document_loaders import DocumentLoader
-from .prepare.vectorstores import VectorStoreManager
+from .processing.database import DatabaseConnector  
+from .processing.document_loaders import DocumentLoader
+from .processing.vectorstores import VectorStoreManager
 from .utils import TimeConverter
 
 # Package metadata

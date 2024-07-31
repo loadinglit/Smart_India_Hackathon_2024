@@ -11,8 +11,8 @@ from langchain.chains import RetrievalQA
 from llama_index.core import ChatPromptTemplate
 from langchain_core.prompts import PromptTemplate
 from llama_index.core.memory import ChatMemoryBuffer
-from rag.prepare.vectorstores import VectorStoreManager
-from rag.prepare.custom_chat_store import MongoChatStore
+from rag.processing.vectorstores import VectorStoreManager
+from rag.processing.custom_chat_store import MongoChatStore
 from langchain_community.callbacks import get_openai_callback
 
 class ChatService:

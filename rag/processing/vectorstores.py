@@ -3,7 +3,7 @@ import tiktoken
 from rag.models import Models
 from rag.settings import logger
 from llama_index.core import Settings
-from rag.prepare.database import DatabaseConnector
+from rag.processing.database import DatabaseConnector
 from pymongo.operations import SearchIndexModel
 from llama_index.core.callbacks import TokenCountingHandler
 from llama_index.core import VectorStoreIndex, StorageContext
@@ -190,14 +190,14 @@ class VectorStoreManager:
             If there is an error retrieving the vector store.
         """
         try:
-            vector_search = MongoDBAtlasVectorSearch.from_connection_string(
+            vectorstore = MongoDBAtlasVectorSearch.from_connection_string(
                 self.URI,
                 db_name + "." + collection_name,
                 self.models.embed_model,
                 index_name=collection_name,
             )
-            logger.info("Vector store index retrieved successfully")
-            return vector_search
+            logger.info("Vector store retrieved successfully")
+            return vectorstore
         except Exception as e:
             logger.error(f"Error retrieving vector store: {e}")
             raise

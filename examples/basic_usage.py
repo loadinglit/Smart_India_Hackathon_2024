@@ -2,8 +2,8 @@ import os
 from rag.secrets import Secrets
 from rag.inference.chat import ChatService
 from rag.models import LiteLLMModels
-from rag.prepare.document_loaders import DocumentLoader
-from rag.prepare.vectorstores import VectorStoreManager
+from rag.processing.document_loaders import DocumentLoader
+from rag.processing.vectorstores import VectorStoreManager
 
 def main():
     directory_path = "path/to/your/documents"
