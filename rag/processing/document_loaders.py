@@ -163,3 +163,55 @@ class DocumentLoader:
         except Exception as e:
                 logger.error(f"Error loading documents from S3: {e}")
                 raise
+
+    def load_document_from_s3(bucket_name: str, key: str) -> list:
+            """
+            Loads single document from an S3 bucket.
+
+            Parameters
+            ----------
+            bucket_name : str
+                The name of the S3 bucket.
+            key : str
+                The key within the S3 bucket.
+
+            Returns
+            -------
+            list
+                A list of loaded documents.
+
+            Raises
+            ------
+            ValueError
+                If the bucket name or directory is not provided.
+            Exception
+                If there is an error loading documents from S3.
+            """
+            if not bucket_name or not key:
+                raise ValueError(
+                    "Both bucket name and key must be provided.")
+            
+            valid_extensions = ['pdf', 'txt', 'md', 'docs', 'docx']
+
+            try:
+
+                    # Load documents using S3Reader
+                    reader = S3Reader(
+                        bucket=bucket_name,
+                        key = key,
+                        aws_access_id=Secrets.AWS_ACCESS_ID,
+                        aws_access_secret=Secrets.AWS_ACCESS_SECRET_KEY,
+                    )
+                    documents = reader.load_data()
+                    logger.info(
+                        f"Loaded {len(documents)} documents from S3 bucket {bucket_name}")
+
+                    # Convert documents to the desired format using DocumentLoader
+                    lc_documents = DocumentLoader._convert_format(documents)
+                    return lc_documents
+            except (NoCredentialsError, PartialCredentialsError) as cred_error:
+                    logger.error(f"AWS credentials error: {cred_error}")
+                    raise
+            except Exception as e:
+                    logger.error(f"Error loading documents from S3: {e}")
+                    raise
