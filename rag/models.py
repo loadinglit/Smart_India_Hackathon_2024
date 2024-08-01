@@ -41,11 +41,11 @@ class Models:
         logger.info(f"Azure {Secrets.GPT4o_MODEL} initialized")
         
         self.embed_model = AzureOpenAIEmbeddings(
-            openai_api_version=Secrets.ADA_VERSION,
-            base_url=Secrets.ADA_BASE_URL,
-            openai_api_key=Secrets.ADA_API_KEY,
+            openai_api_version=Secrets.TE3S_VERSION,
+            base_url=Secrets.TE3S_BASE_URL,
+            openai_api_key=Secrets.TE3S_API_KEY,
         )
-        logger.info(f"Azure {Secrets.ADA_MODEL} initialized")
+        logger.info(f"Azure {Secrets.TE3S_MODEL} initialized")
 
         self.lite_llm = openai.OpenAI(
             api_key=Secrets.LITELLM_KEY, 

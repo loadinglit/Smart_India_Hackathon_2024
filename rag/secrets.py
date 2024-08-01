@@ -10,11 +10,11 @@ class Secrets:
     GPT4o_MODEL = os.environ.get("AOAI_GPT4o_MODEL")
     AOAI_GPT4o_DEPLOYMENT = os.environ.get("AOAI_GPT4o_DEPLOYMENT")
 
-    ADA_BASE_URL = os.environ.get("AOAI_ADA_BASE_URL")
-    ADA_API_KEY = os.environ.get("AOAI_GPT4_KEY")
-    ADA_VERSION = os.environ.get("AOAI_ADA_VERSION")
-    ADA_MODEL = os.environ.get("AOAI_ADA_MODEL")
-    ADA_DEPLOYMENT = os.environ.get("AOAI_ADA_DEPLOYMENT")
+    TE3S_BASE_URL = os.environ.get("AOAI_TE3S_BASE_URL")
+    TE3S_API_KEY = os.environ.get("AOAI_TE3S_KEY")
+    TE3S_VERSION = os.environ.get("AOAI_TE3S_VERSION")
+    TE3S_MODEL = os.environ.get("AOAI_TE3S_MODEL")
+    TE3S_DEPLOYMENT = os.environ.get("AOAI_TE3S_DEPLOYMENT")
 
     LITELLM_KEY = os.environ.get("LITELLM_KEY")
     LITELLM_BASE_URL = os.environ.get("LITELLM_BASE_URL")
