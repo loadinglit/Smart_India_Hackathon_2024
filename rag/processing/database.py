@@ -1,3 +1,4 @@
+import redis
 import pymongo
 import sqlalchemy
 from rag.settings import logger
@@ -29,8 +30,8 @@ class DatabaseConnector:
 
         if db_type == 'mongodb':
             self.connect_mongodb(URI)
-        elif db_type == 'sql':
-            self.connect_sql()
+        elif db_type == 'redis':
+            self.connect_redis(URI)
         else:
             logger.error(f"Unsupported database type: {db_type}")
             raise ValueError(f"Unsupported database type: {db_type}")
@@ -55,6 +56,28 @@ class DatabaseConnector:
         except pymongo.errors.ConnectionFailure as e:
             logger.error(f"Error connecting to MongoDB: {e}")
             raise
+
+    def connect_redis(self, URI: str):
+        """
+        Connects to Redis using the provided URI.
+
+        Parameters
+        ----------
+        URI : str
+            The connection string for Redis.
+
+        Raises
+        ------
+        pymongo.errors.ConnectionFailure
+            If there is an error connecting to Redis.
+        """
+        try:
+            self.client = redis.Redis.from_url(URI)
+            logger.info("Connected to Redis")
+        except Exception as e:
+            logger.error(f"Error connecting to Redis: {e}")
+            raise
+
 
     # def connect_sql(self):
     #     """

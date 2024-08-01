@@ -18,6 +18,7 @@ class DocumentLoader:
     load_documents_from_s3(bucket_name: str, directory: str) -> list
         Loads documents from an S3 bucket.
     """
+    
     @staticmethod
     def _convert_format(documents: list) -> list:
         lc_documents = []
@@ -55,21 +56,26 @@ class DocumentLoader:
         valid_extensions = ['pdf', 'txt', 'md', 'docs', 'docx']
 
         try:
+            file_count=0
             invalid_files = []
             for root, _, files in os.walk(directory_path):
                 for file in files:
+                    file_count+=1
                     if not any(file.lower().endswith(ext) for ext in valid_extensions):
                         invalid_files.append(file)
-
+            
+            if file_count > Secrets.FILE_UPLOAD_LIMIT:
+                 raise ValueError(
+                      "Please try to upload less number of files."
+                 )
             if invalid_files:
                 raise ValueError(
                     f"Directory contains invalid file types: {invalid_files}")
 
             reader = SimpleDirectoryReader(directory_path)
             documents = reader.load_data()
-            logger.info(
-                f"Loaded {len(documents)} documents from {directory_path}")
             lc_documents = DocumentLoader._convert_format(documents)
+            logger.info(f"Loaded {file_count} documents from {directory_path}")  
             return lc_documents
         except Exception as e:
             logger.error(f"Error loading documents from directory: {e}")
@@ -122,10 +128,17 @@ class DocumentLoader:
 
                 # Check if all files have valid extensions
                 invalid_files = []
+                file_count=0
                 for obj in response['Contents']:
                     file_name = obj['Key']
+                    file_count+=1
                     if not any(file_name.lower().endswith(ext) for ext in valid_extensions):
                         invalid_files.append(file_name)
+                
+                if file_count > Secrets.FILE_UPLOAD_LIMIT:
+                 raise ValueError(
+                      "Please try to upload less number of files."
+                 )
 
                 if invalid_files:
                     raise ValueError(

@@ -18,3 +18,5 @@ fastapi
 uvicorn
 pymongo
 context-python
+redis
+redisearch

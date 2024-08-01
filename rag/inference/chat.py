@@ -1,3 +1,4 @@
+
 import os
 import warnings
 from typing import Union
@@ -125,10 +126,6 @@ class ChatService:
                 search_kwargs={"k": 3},
             )
 
-            # text_qa_template = ChatPromptTemplate.from_messages(
-            #     self.prompts.get_chat_text_qa_msgs()
-            # )
-
             PROMPT = self.prompts.prompt
 
             runnable = PROMPT | self.models.azure_llm
@@ -146,27 +143,9 @@ class ChatService:
                     config={"configurable": {"session_id": "abc123"}},
                 )
                 logger.info(f"Total tokens used: {cb.total_tokens}")
-
-            # with get_openai_callback() as cb:
-            #     qa = RetrievalQA.from_chain_type(
-            #         llm=self.models.azure_llm,
-            #         chain_type="stuff",
-            #         retriever=qa_retriever,
-            #         return_source_documents=True,
-            #         chain_type_kwargs={"prompt": PROMPT},
-            #     )
-            #     docs = qa({"query": user_query})
-            #     logger.info(f"Total tokens used: {cb.total_tokens}")
-
-            # if not answer.source_nodes:
-            #     logger.warning("No nodes retrieved from software manuals.")
-            # else:
-            #     logger.info(f"Retrieved {len(answer.source_nodes)} nodes for query: {user_query}")
             logger.info("Query processed successfully")
             return {
-                # "response": docs["result"],
                 "response": response.content
-                # "source_documents": answer.source_nodes[0].metadata["file_name"],
             }
         except Exception as e:
             logger.error(f"Error processing query: {e}")

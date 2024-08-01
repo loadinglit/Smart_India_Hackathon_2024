@@ -20,6 +20,9 @@ class Secrets:
     LITELLM_BASE_URL = os.environ.get("LITELLM_BASE_URL")
 
     ATLAS_CONNECTION_STRING = os.environ.get("ATLAS_CONNECTION_STRING")
+    REDIS_CONNECTION_STRING = os.environ.get("REDIS_CONNECTION_STRING")
 
     AWS_ACCESS_ID = os.environ.get("AWS_ACCESS_ID")
     AWS_ACCESS_SECRET_KEY = os.environ.get("AWS_ACCESS_SECRET_KEY")
+
+    FILE_UPLOAD_LIMIT = 200
