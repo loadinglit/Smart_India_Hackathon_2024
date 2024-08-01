@@ -7,13 +7,14 @@ from rag.prompts import Prompts
 from rag.secrets import Secrets
 from rag.models import LiteLLMModels
 from llama_index.core import Settings
-from langchain.chains import RetrievalQA
-from llama_index.core import ChatPromptTemplate
-from langchain_core.prompts import PromptTemplate
-from llama_index.core.memory import ChatMemoryBuffer
+from langchain.cache import InMemoryCache
+from langchain.globals import set_llm_cache
 from rag.processing.vectorstores import VectorStoreManager
 from rag.processing.custom_chat_store import MongoChatStore
 from langchain_community.callbacks import get_openai_callback
+from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_community.chat_message_histories import ChatMessageHistory
 
 class ChatService:
     def __init__(self):
@@ -22,7 +23,9 @@ class ChatService:
         self.models = Models()
         Settings.llm = self.models.azure_llm
         Settings.embed_model = self.models.embed_model
+        set_llm_cache(InMemoryCache())
         os.environ["ALLOW_RESET"] = "TRUE"
+        self.store = {}
 
     def _initialize_chat_store(self):
         """
@@ -75,6 +78,10 @@ class ChatService:
             "model": response.model,
         }
     
+    def get_session_history(self, session_id: str) -> BaseChatMessageHistory:
+        if session_id not in self.store:
+            self.store[session_id] = ChatMessageHistory()
+        return self.store[session_id]
 
     def chat(
         self,
@@ -122,20 +129,34 @@ class ChatService:
             #     self.prompts.get_chat_text_qa_msgs()
             # )
 
-            PROMPT = PromptTemplate(
-                template=self.prompts.lc_prompt, input_variables=["context", "question"]
+            PROMPT = self.prompts.prompt
+
+            runnable = PROMPT | self.models.azure_llm
+
+            with_message_history = RunnableWithMessageHistory(
+                runnable,
+                self.get_session_history,
+                input_messages_key="question",
+                history_messages_key="history",
             )
 
             with get_openai_callback() as cb:
-                qa = RetrievalQA.from_chain_type(
-                    llm=self.models.azure_llm,
-                    chain_type="stuff",
-                    retriever=qa_retriever,
-                    return_source_documents=True,
-                    chain_type_kwargs={"prompt": PROMPT},
+                response = with_message_history.invoke(
+                    {"question": user_query},
+                    config={"configurable": {"session_id": "abc123"}},
                 )
-                docs = qa({"query": user_query})
                 logger.info(f"Total tokens used: {cb.total_tokens}")
+
+            # with get_openai_callback() as cb:
+            #     qa = RetrievalQA.from_chain_type(
+            #         llm=self.models.azure_llm,
+            #         chain_type="stuff",
+            #         retriever=qa_retriever,
+            #         return_source_documents=True,
+            #         chain_type_kwargs={"prompt": PROMPT},
+            #     )
+            #     docs = qa({"query": user_query})
+            #     logger.info(f"Total tokens used: {cb.total_tokens}")
 
             # if not answer.source_nodes:
             #     logger.warning("No nodes retrieved from software manuals.")
@@ -143,7 +164,8 @@ class ChatService:
             #     logger.info(f"Retrieved {len(answer.source_nodes)} nodes for query: {user_query}")
             logger.info("Query processed successfully")
             return {
-                "response": docs["result"],
+                # "response": docs["result"],
+                "response": response.content
                 # "source_documents": answer.source_nodes[0].metadata["file_name"],
             }
         except Exception as e:

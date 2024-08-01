@@ -17,3 +17,4 @@ streamlit
 fastapi
 uvicorn
 pymongo
+context-python
