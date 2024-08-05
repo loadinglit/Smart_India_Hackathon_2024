@@ -2,10 +2,11 @@ import os
 import boto3
 from rag.settings import logger
 from rag.secrets import Secrets
-from rag.processing.text import text_processing
 from llama_index.readers.s3 import S3Reader
+from rag.processing.text import text_processing
 from llama_index.core import SimpleDirectoryReader
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
+from llama_index.readers.web.main_content_extractor.base import MainContentExtractorReader
 
 
 class DocumentLoader:
@@ -166,6 +167,7 @@ class DocumentLoader:
                 logger.error(f"Error loading documents from S3: {e}")
                 raise
 
+    @staticmethod
     def load_document_from_s3(bucket_name: str, key: str) -> list:
             """
             Loads single document from an S3 bucket.
@@ -210,6 +212,8 @@ class DocumentLoader:
 
                     # cleaned_documents = text_processing.clean_documents(documents)
                     lc_documents = DocumentLoader._convert_format(documents)
+                    logger.info(
+                        f"Loaded {key} from S3 bucket {bucket_name}")
                     return lc_documents
             except (NoCredentialsError, PartialCredentialsError) as cred_error:
                     logger.error(f"AWS credentials error: {cred_error}")
@@ -217,3 +221,49 @@ class DocumentLoader:
             except Exception as e:
                     logger.error(f"Error loading documents from S3: {e}")
                     raise
+            
+
+    @staticmethod
+    def load_document_from_weblink(url: str) -> list:
+            """
+            Loads textual content from the URL in the documents.
+
+            Parameters
+            ----------
+            url : str
+                The URL of the website.
+
+            Returns
+            -------
+            list
+                A list of loaded documents.
+
+            Raises
+            ------
+            ValueError
+                If the URL is not provided.
+            Exception
+                If there is an error loading documents from given URL.
+            """
+            if not url:
+                raise ValueError(
+                    "URL must be provided.")
+            
+            try:
+                loader = MainContentExtractorReader()
+                documents = loader.load_data(urls=[url])
+
+                for doc in documents:
+                    if not hasattr(doc, 'metadata'):
+                        doc.metadata = {}
+                    doc.metadata['source_url'] = url
+
+                cleaned_documents = text_processing.clean_documents(documents)
+                lc_documents = DocumentLoader._convert_format(cleaned_documents)
+                logger.info(
+                    f"Loaded document from URL: {url}")
+                return lc_documents
+            except Exception as e:
+                 logger.error(f"Couldn't load {url} due to: {e}")
+                 raise 
+                 
