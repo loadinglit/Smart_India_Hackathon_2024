@@ -32,7 +32,6 @@ class Prompts:
                             - Natural and conversational, using everyday language, interjections, and expressions.
                             - Empathetic and personalized to the customer's issues. 
                             
-                            Include acknowledging and affirming phrases like "I understand," "That sounds frustrating," and "Let me see how I can help you with that." 
                             Ask follow-up questions to better understand the issue, such as "Can you give me more details on that?" or "When did you start experiencing this problem?" 
                             Offer reassurance and encouragement with phrases like "Don't worry, we'll figure this out," or "I'm here to help you through this." Keep your responses concise, under 50 words, to maintain engagement. Establish rapport while troubleshooting.
                         "

@@ -2,6 +2,7 @@ import os
 import boto3
 from rag.settings import logger
 from rag.secrets import Secrets
+from rag.processing.text import text_processing
 from llama_index.readers.s3 import S3Reader
 from llama_index.core import SimpleDirectoryReader
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
@@ -25,7 +26,7 @@ class DocumentLoader:
         for doc in documents:
             lc_doc = doc.to_langchain_format()
             lc_documents.append(lc_doc)
-
+        logger.info("Converted to langchain format")
         return lc_documents
 
     @staticmethod
@@ -74,6 +75,7 @@ class DocumentLoader:
 
             reader = SimpleDirectoryReader(directory_path)
             documents = reader.load_data()
+            # cleaned_documents = text_processing.clean_documents(documents)
             lc_documents = DocumentLoader._convert_format(documents)
             logger.info(f"Loaded {file_count} documents from {directory_path}")  
             return lc_documents
@@ -154,7 +156,7 @@ class DocumentLoader:
                 logger.info(
                     f"Loaded {len(documents)} documents from S3 bucket {bucket_name}")
 
-                # Convert documents to the desired format using DocumentLoader
+                # cleaned_documents = text_processing.clean_documents(documents)
                 lc_documents = DocumentLoader._convert_format(documents)
                 return lc_documents
         except (NoCredentialsError, PartialCredentialsError) as cred_error:
@@ -206,7 +208,7 @@ class DocumentLoader:
                     logger.info(
                         f"Loaded {len(documents)} documents from S3 bucket {bucket_name}")
 
-                    # Convert documents to the desired format using DocumentLoader
+                    # cleaned_documents = text_processing.clean_documents(documents)
                     lc_documents = DocumentLoader._convert_format(documents)
                     return lc_documents
             except (NoCredentialsError, PartialCredentialsError) as cred_error:

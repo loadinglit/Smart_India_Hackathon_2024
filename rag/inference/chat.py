@@ -8,8 +8,8 @@ from rag.prompts import Prompts
 from rag.secrets import Secrets
 from rag.models import LiteLLMModels
 from llama_index.core import Settings
-from langchain.cache import InMemoryCache
 from langchain.globals import set_llm_cache
+from langchain_community.cache import InMemoryCache
 from rag.processing.vectorstores import VectorStoreManager
 from rag.processing.custom_chat_store import MongoChatStore
 from langchain_community.callbacks import get_openai_callback
