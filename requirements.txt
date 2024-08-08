@@ -20,3 +20,4 @@ pymongo
 context-python
 redis
 redisearch
+openpyxl
