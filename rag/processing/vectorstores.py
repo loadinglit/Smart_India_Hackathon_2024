@@ -8,7 +8,7 @@ from pymongo.operations import SearchIndexModel
 from llama_index.core.callbacks import TokenCountingHandler
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.vector_stores.mongodb import MongoDBAtlasVectorSearch
-from langchain_community.vectorstores import MongoDBAtlasVectorSearch
+from langchain_mongodb.vectorstores import MongoDBAtlasVectorSearch
 
 class VectorStoreManager:
     """
