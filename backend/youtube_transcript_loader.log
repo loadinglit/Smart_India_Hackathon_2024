@@ -1,0 +1,66 @@
+2024-12-06 17:41:10,040 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2024-12-06 17:41:13,123 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_6qSqrUIARiE.txt
+2024-12-06 17:41:14,293 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Kannada (auto-generated) for video _t4AM2PtKDM.
+2024-12-06 17:41:14,581 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript__t4AM2PtKDM.txt
+2024-12-06 17:41:15,790 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video FR_8pD538gw.
+2024-12-06 17:41:15,992 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_FR_8pD538gw.txt
+2024-12-06 17:41:16,834 - app.services.youtube_service - WARNING - Transcripts disabled for video: oJeZO7W_Rgw
+2024-12-06 17:41:17,547 - app.services.youtube_service - WARNING - Transcripts disabled for video: goc81nOiSPo
+2024-12-06 17:41:18,610 - app.services.youtube_service - WARNING - Transcripts disabled for video: I5mXwPqPme0
+2024-12-06 17:41:19,730 - app.services.youtube_service - WARNING - Transcripts disabled for video: 0CoeoIiS3ZU
+2024-12-06 17:41:20,655 - app.services.youtube_service - WARNING - Transcripts disabled for video: WtluFLdwzus
+2024-12-06 17:41:21,797 - app.services.youtube_service - WARNING - Transcripts disabled for video: OHUsGC1wyDY
+2024-12-06 17:41:22,765 - app.services.youtube_service - WARNING - Transcripts disabled for video: RUQNyvk-s70
+2024-12-06 17:41:23,820 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video h2FCbBB33fs.
+2024-12-06 17:41:24,060 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_h2FCbBB33fs.txt
+2024-12-06 17:41:25,204 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_DFtAS1BCKvk.txt
+2024-12-06 17:41:26,106 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_VgJhjCPbORs.txt
+2024-12-06 17:41:26,898 - app.services.youtube_service - WARNING - Transcripts disabled for video: o1j8eX7D8SQ
+2024-12-06 17:41:28,209 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_WKfVzJSDAd8.txt
+2024-12-06 17:41:28,324 - app.services.youtube_service - INFO - Loaded 94 documents from output/Transcripts/
+2024-12-06 17:41:34,918 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-06 17:41:36,745 - app.services.youtube_service - INFO - Documents added successfully in the Vector Database
+2024-12-06 17:42:22,140 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2024-12-06 17:42:24,166 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_6qSqrUIARiE.txt
+2024-12-06 17:42:24,905 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Kannada (auto-generated) for video _t4AM2PtKDM.
+2024-12-06 17:42:25,123 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript__t4AM2PtKDM.txt
+2024-12-06 17:42:26,114 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video FR_8pD538gw.
+2024-12-06 17:42:26,290 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_FR_8pD538gw.txt
+2024-12-06 17:42:27,879 - app.services.youtube_service - WARNING - Transcripts disabled for video: oJeZO7W_Rgw
+2024-12-06 17:42:29,661 - app.services.youtube_service - WARNING - Transcripts disabled for video: goc81nOiSPo
+2024-12-06 17:42:30,455 - app.services.youtube_service - WARNING - Transcripts disabled for video: I5mXwPqPme0
+2024-12-06 17:42:31,211 - app.services.youtube_service - WARNING - Transcripts disabled for video: 0CoeoIiS3ZU
+2024-12-06 17:42:32,058 - app.services.youtube_service - WARNING - Transcripts disabled for video: WtluFLdwzus
+2024-12-06 17:42:32,876 - app.services.youtube_service - WARNING - Transcripts disabled for video: OHUsGC1wyDY
+2024-12-06 17:42:33,726 - app.services.youtube_service - WARNING - Transcripts disabled for video: RUQNyvk-s70
+2024-12-06 17:42:34,594 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video h2FCbBB33fs.
+2024-12-06 17:42:34,788 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_h2FCbBB33fs.txt
+2024-12-06 17:42:35,786 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_DFtAS1BCKvk.txt
+2024-12-06 17:42:37,049 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_VgJhjCPbORs.txt
+2024-12-06 17:42:38,095 - app.services.youtube_service - WARNING - Transcripts disabled for video: o1j8eX7D8SQ
+2024-12-06 17:42:39,234 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_WKfVzJSDAd8.txt
+2024-12-06 17:42:39,292 - app.services.youtube_service - INFO - Loaded 94 documents from output/Transcripts/
+2024-12-06 17:42:48,841 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-06 17:42:50,790 - app.services.youtube_service - INFO - Documents added successfully in the Vector Database
+2024-12-06 17:43:04,159 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2024-12-06 17:43:07,279 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_6qSqrUIARiE.txt
+2024-12-06 17:43:08,083 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Kannada (auto-generated) for video _t4AM2PtKDM.
+2024-12-06 17:43:08,282 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript__t4AM2PtKDM.txt
+2024-12-06 17:43:09,073 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video FR_8pD538gw.
+2024-12-06 17:43:09,323 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_FR_8pD538gw.txt
+2024-12-06 17:43:10,655 - app.services.youtube_service - WARNING - Transcripts disabled for video: oJeZO7W_Rgw
+2024-12-06 17:43:11,411 - app.services.youtube_service - WARNING - Transcripts disabled for video: goc81nOiSPo
+2024-12-06 17:43:12,571 - app.services.youtube_service - WARNING - Transcripts disabled for video: I5mXwPqPme0
+2024-12-06 17:43:13,285 - app.services.youtube_service - WARNING - Transcripts disabled for video: 0CoeoIiS3ZU
+2024-12-06 17:43:14,049 - app.services.youtube_service - WARNING - Transcripts disabled for video: WtluFLdwzus
+2024-12-06 17:43:14,899 - app.services.youtube_service - WARNING - Transcripts disabled for video: OHUsGC1wyDY
+2024-12-06 17:43:15,661 - app.services.youtube_service - WARNING - Transcripts disabled for video: RUQNyvk-s70
+2024-12-06 17:43:16,639 - app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video h2FCbBB33fs.
+2024-12-06 17:43:17,112 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_h2FCbBB33fs.txt
+2024-12-06 17:43:18,442 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_DFtAS1BCKvk.txt
+2024-12-06 17:43:19,269 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_VgJhjCPbORs.txt
+2024-12-06 17:43:20,148 - app.services.youtube_service - WARNING - Transcripts disabled for video: o1j8eX7D8SQ
+2024-12-06 17:43:21,231 - app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_WKfVzJSDAd8.txt
+2024-12-06 17:43:21,287 - app.services.youtube_service - INFO - Loaded 94 documents from output/Transcripts/
+2024-12-06 17:43:26,540 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-06 17:43:28,380 - app.services.youtube_service - INFO - Documents added successfully in the Vector Database
