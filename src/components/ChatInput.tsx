@@ -1,8 +1,9 @@
 import React, { useState, KeyboardEvent } from 'react';
-import { Paperclip, Mic, Send, Sparkles, Share2 } from 'lucide-react';
+import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon } from 'lucide-react';
 
 const ChatInput = () => {
   const [input, setInput] = useState('');
+  const [isToggleOn, setIsToggleOn] = useState(false); // State for toggle switch
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && input.trim()) {
@@ -15,6 +16,11 @@ const ChatInput = () => {
       console.log('Sending message:', input);
       setInput('');
     }
+  };
+
+  const toggleSwitch = () => {
+    setIsToggleOn((prev) => !prev);
+    console.log('Toggle State:', isToggleOn ? 'Off' : 'On');
   };
 
   return (
@@ -34,24 +40,29 @@ const ChatInput = () => {
           className="w-full p-4 pl-14 pr-40 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-2">
+          {/* Toggle Button with Hover Effect */}
+          <div className="relative group">
+            <button
+              onClick={toggleSwitch}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+            >
+              {isToggleOn ? (
+                <ToggleRightIcon className="w-10 h-7 text-green-500" />
+              ) : (
+                <ToggleLeftIcon className="w-10 h-7 text-gray-500" />
+              )}
+            </button>
+            {/* Hover Text */}
+            <span  className="absolute up-9 down-7 -translate-x-14 bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white px--3 py--6 rounded-md text-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-900 bottom: 40px">
+            Complex
+            </span>
+          </div>
           <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-            <Paperclip className="w-5 h-5 text-gray-500" />
+            <Mic className="w-8 h-6 text-gray-500" />
           </button>
           <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-            <Sparkles className="w-5 h-5 text-gray-500" />
+            <SendIcon className="w-6 h-6 text-gray-500" />
           </button>
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-            <Mic className="w-5 h-5 text-gray-500" />
-          </button>
-         {/* <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
-            <Share2 className="w-5 h-5 text-gray-500" />
-          </button>
-          <button 
-            onClick={handleSend}
-            className="p-2 bg-blue-600 hover:bg-blue-700 rounded-full transition-colors"
-          >
-            <Send className="w-5 h-5 text-white" />
-          </button> */}
         </div>
       </div>
     </div>
