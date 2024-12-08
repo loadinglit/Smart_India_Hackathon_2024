@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-purple: #b026ff;
+  --dark: #0a0a0a;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--dark);
+  color: white;
+}
+
+.cursor-effect {
+  pointer-events: none;
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neon-purple);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  z-index: 9999;
+}
+
+.spark {
+  pointer-events: none;
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--neon-purple);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: spark 1s linear forwards;
+  z-index: 9999;
+}
+
+@keyframes spark {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
