@@ -1,26 +1,26 @@
-import React, { useState, KeyboardEvent } from 'react';
-import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon } from 'lucide-react';
+import React, { useState } from "react";
+import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon } from "lucide-react";
 
 const ChatInput = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isToggleOn, setIsToggleOn] = useState(false); // State for toggle switch
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && input.trim()) {
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && input.trim()) {
       handleSend();
     }
   };
 
   const handleSend = () => {
     if (input.trim()) {
-      console.log('Sending message:', input);
-      setInput('');
+      console.log("Sending message:", input);
+      setInput("");
     }
   };
 
   const toggleSwitch = () => {
     setIsToggleOn((prev) => !prev);
-    console.log('Toggle State:', isToggleOn ? 'Off' : 'On');
+    console.log("Toggle State:", isToggleOn ? "Off" : "On");
   };
 
   return (
@@ -53,8 +53,8 @@ const ChatInput = () => {
               )}
             </button>
             {/* Hover Text */}
-            <span  className="absolute up-9 down-7 -translate-x-14 bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white px--3 py--6 rounded-md text-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-900 bottom: 40px">
-            Complex
+            <span className="absolute up-9 down-7 -translate-x-14 bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white px--3 py--6 rounded-md text-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-900 bottom:60px">
+              Complex
             </span>
           </div>
           <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
