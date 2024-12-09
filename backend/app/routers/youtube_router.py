@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from app.services.youtube_service import process_youtube_channel
+from backend.app.services.youtube_service import process_youtube_channel
 
 router = APIRouter()
 

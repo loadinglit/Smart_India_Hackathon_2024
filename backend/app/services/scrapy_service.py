@@ -5,7 +5,7 @@ import nltk
 from multiprocessing import Process, Queue
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from scrapy_project.spiders.my_spider import MySpider
+from backend.scrapy_project.spiders.my_spider import MySpider
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import AzureOpenAIEmbeddings

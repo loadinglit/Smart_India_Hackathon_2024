@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, File, UploadFile
-from app.services.pdf_service import process_pdf_and_embed
+from backend.app.services.pdf_service import process_pdf_and_embed
 import os
 
 router = APIRouter()

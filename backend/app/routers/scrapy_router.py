@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, HttpUrl
-from app.services.scrapy_service import run_spider
+from backend.app.services.scrapy_service import run_spider
 import logging
-from scrapy_project.spiders.my_spider import MySpider
+from backend.scrapy_project.spiders.my_spider import MySpider
 
 
 
