@@ -36,8 +36,8 @@ function App() {
             {/* The mentorship page */}
             <Route path="/mentorship" element={<><Header /><Mentorship /><Footer /></>} />
             <Route path="/welcome" element={<><Navbar /><Sidebar/><Welcome /><ChatInput /></>} />
-            <Route path="/knowledge-hub" element={<><Navbar /><Sidebar/><KnowledgeBase /><ChatInput /></>} />
-            <Route path="/datamanagement" element={<><Navbar /><Sidebar/><DataManagement /><ChatInput /></>} />
+            <Route path="/knowledge-hub" element={<><Navbar /><Sidebar/><KnowledgeBase /></>} />
+            <Route path="/datamanagement" element={<><Navbar /><DataManagement /><Sidebar></Sidebar></>} />
           </Routes>
         </main>
       </div>
