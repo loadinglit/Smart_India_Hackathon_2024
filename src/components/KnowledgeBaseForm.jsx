@@ -33,16 +33,13 @@ const KnowledgeBaseForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-
+    
     // Special handling for exclude domains to split into array
     if (name === "excludeDomains") {
-      const domainsArray = value
-        .split(",")
-        .map((domain) => domain.trim())
-        .filter((domain) => domain !== "");
-      setFormData((prev) => ({
+      const domainsArray = value.split(',').map(domain => domain.trim()).filter(domain => domain !== "");
+      setFormData(prev => ({
         ...prev,
-        [name]: domainsArray,
+        [name]: domainsArray
       }));
       return;
     }
@@ -121,10 +118,10 @@ const KnowledgeBaseForm = () => {
     // Prepare request body with proper formatting
     const requestBody = {
       url: formData.websiteUrl,
-      exclude_keywords: formData.excludeKeywords
-        ? formData.excludeKeywords.split(",").map((kw) => kw.trim())
+      exclude_keywords: formData.excludeKeywords 
+        ? formData.excludeKeywords.split(',').map(kw => kw.trim())
         : [],
-      exclude_domains: formData.excludeDomains || [],
+      exclude_domains: formData.excludeDomains || []
     };
 
     // Add depth limit for crawling mode
@@ -134,8 +131,8 @@ const KnowledgeBaseForm = () => {
 
     const endpoint =
       urlMode === "single"
-        ? "http://localhost:8000/scrapy/scrape" // Scraping endpoint
-        : "http://localhost:8000/scrapy/crawl"; // Crawling endpoint
+        ? "http://localhost:8000/scrapy/scrape"  // Scraping endpoint
+        : "http://localhost:8000/scrapy/crawl";  // Crawling endpoint
 
     try {
       setLoading(true);
@@ -172,18 +169,18 @@ const KnowledgeBaseForm = () => {
 
   const handleCSVFileChange = (e) => {
     const selectedFile = e.target.files[0];
-
+    
     if (selectedFile) {
       const fileType = selectedFile.type;
-      const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
-
+      const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
+  
       // Ensure it's a CSV file
       if (fileType !== "text/csv" && fileExtension !== "csv") {
         alert("Please select a valid CSV file.");
         e.target.value = ""; // Clear the input
         return;
       }
-
+  
       setFile(selectedFile);
     }
   };
@@ -205,6 +202,7 @@ const KnowledgeBaseForm = () => {
         method: "POST",
         body: formData,
       });
+
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -238,16 +236,16 @@ const KnowledgeBaseForm = () => {
       placeholder: "Enter website URL",
     },
     {
-      name: "excelFile",
+      name: "excelFile", 
       icon: FileSpreadsheet,
-      label: "Excel Upload",
+      label: "Excel Upload", 
       type: "file",
-      placeholder: "Upload Excel File",
-    },
+      placeholder: "Upload Excel File"
+    }
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white ml-60 ">
+    <div className="min-h-screen bg-black text-white">
       <form onSubmit={(e) => e.preventDefault()} className="space-y-6 p-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {inputFields.map((field) => (
@@ -420,7 +418,7 @@ const KnowledgeBaseForm = () => {
                         type="text"
                         id="excludeDomains"
                         name="excludeDomains"
-                        value={formData.excludeDomains.join(", ")}
+                        value={formData.excludeDomains.join(', ')}
                         onChange={handleInputChange}
                         placeholder="e.g., example.com, test.com"
                         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white"
@@ -441,8 +439,8 @@ const KnowledgeBaseForm = () => {
                           value={formData.crawlLimit}
                           onChange={handleInputChange}
                           placeholder="Enter number of pages to crawl"
-                          className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white"
-                        />
+                           className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white"
+                           />
                       </div>
                     )}
                     <button
@@ -473,3 +471,4 @@ const KnowledgeBaseForm = () => {
 };
 
 export default KnowledgeBaseForm;
+                          
