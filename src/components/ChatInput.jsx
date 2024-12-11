@@ -27,42 +27,50 @@ const ChatInterface = () => {
   };
 
   const handleSendMessage = async () => {
-    if (!input.trim()) return;
-
+    if (!input.trim()) {
+      console.error("Input is empty.");
+      return;
+    }
+  
     const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
-
+  
     try {
+      // Fetch the user's IP address
       const userIp = await getIpAddress();
+  
+      // Send the POST request to the API
       const response = await axios.post(
-        "http://smart-india-hackathon-2024.onrender.com/rag/siva/query",
+        "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
         {
-          method: "POST",
+          user_query: input.trim(),
+          user_ip: userIp,
+          db_name: "SIH",
+          collection_name: "pdfs",
+        },
+        {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true,
-          body: JSON.stringify({
-            user_query: input,
-
-            user_ip: userIp,
-            db_name: "SIH",
-            collection_name: "pdfs",
-          }),
+          withCredentials: true, // Optional: Only if cookies/session are used
         }
       );
-
-      const data = await response.json();
+  
+      // Extract the response data
+      const data = response.data;
+  
+      // Append the assistant's response to the chat messages
       const assistantMessage = {
         role: "assistant",
-        content: data.response,
+        content: data.response || "No response received.",
       };
-
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
+  
+      // Append a default error message if the request fails
       const errorMessage = {
         role: "assistant",
         content: "Sorry, I could not process your request.",
@@ -72,6 +80,7 @@ const ChatInterface = () => {
       setIsLoading(false);
     }
   };
+  
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
