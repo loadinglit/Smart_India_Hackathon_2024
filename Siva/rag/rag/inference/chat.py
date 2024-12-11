@@ -9,7 +9,10 @@ from Siva.rag.rag.prompts import Prompts
 from Siva.rag.rag.models import LiteLLMModels
 from llama_index.core import Settings
 from langchain.globals import set_llm_cache
+
 from langchain_community.cache import InMemoryCache
+
+import redis
 from langchain_core.runnables import (
     ConfigurableFieldSpec,
     RunnablePassthrough,
@@ -17,6 +20,7 @@ from langchain_core.runnables import (
 from Siva.rag.rag.secrets import Secrets
 from Siva.rag.rag.utils import TimeConverter
 from Siva.rag.rag.processing.vectorstores import VectorStoreManager
+
 # from Siva.rag.rag.processing.custom_chat_store import MongoChatStore
 from langchain_community.callbacks import get_openai_callback
 from langchain_core.chat_history import BaseChatMessageHistory
@@ -49,7 +53,15 @@ class ChatService:
         self.models = Models(seed=SEED_VALUE)
         Settings.llm = self.models.azure_llm
         Settings.embed_model = self.models.embed_model
+
         set_llm_cache(InMemoryCache())
+
+        try:
+            redis_client = redis.Redis(host="localhost", port=6379, db=0)
+            set_llm_cache(RedisCache(redis_client))
+            logger.info("Redis cache initialized successfully")
+        except Exception as e:
+            logger.warning(f"Could not set up Redis cache: {e}")
         os.environ["ALLOW_RESET"] = "TRUE"
         self.store = {}
         self.analytics = Analytics()
