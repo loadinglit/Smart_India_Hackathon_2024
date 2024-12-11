@@ -624,3 +624,37 @@
 2024-12-12 00:31:38,015 - Siva.rag.rag.settings - INFO - Total tokens used: 890
 2024-12-12 00:31:38,514 - Siva.rag.rag.settings - INFO - Query data stored successfully
 2024-12-12 00:31:38,514 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 01:26:41,432 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 01:26:42,097 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 01:26:42,267 - Siva.rag.rag.settings - WARNING - Could not set up Redis cache: name 'RedisCache' is not defined
+2024-12-12 01:26:43,184 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 01:28:11,289 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 01:28:12,095 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 01:28:13,314 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 01:28:20,815 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 01:28:21,468 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 01:28:22,346 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 01:28:25,029 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 01:28:26,761 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 01:28:28,667 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 01:28:29,918 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 01:28:29,974 - Siva.rag.rag.settings - INFO - Total tokens used: 664
+2024-12-12 01:28:30,357 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 01:28:30,358 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 01:32:36,511 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 01:32:37,326 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 01:32:38,552 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 01:32:39,091 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 01:32:40,571 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 01:32:41,460 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 01:32:44,851 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 01:32:44,854 - Siva.rag.rag.settings - INFO - Total tokens used: 1002
+2024-12-12 01:32:48,258 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 01:32:48,969 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 01:32:49,637 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 01:32:50,194 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 01:32:51,586 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 01:32:52,680 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 01:32:52,683 - Siva.rag.rag.settings - INFO - No timestamp found in the response.
+2024-12-12 01:32:52,742 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 01:32:52,744 - Siva.rag.rag.settings - INFO - Query processed successfully

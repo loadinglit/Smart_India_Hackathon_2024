@@ -6,7 +6,7 @@ const Welcome = () => {
     <div className="h-[calc(100vh-64px)] flex items-center justify-center">
       <div className="flex flex-col items-center px-8">
         <h1 className="text-7xl font-bold mb-4 text-center">
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+          <span className="animated-gradient">
             Hello, Bhoomika
           </span>
         </h1>

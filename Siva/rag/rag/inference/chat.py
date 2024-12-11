@@ -56,12 +56,6 @@ class ChatService:
 
         set_llm_cache(InMemoryCache())
 
-        try:
-            redis_client = redis.Redis(host="localhost", port=6379, db=0)
-            set_llm_cache(RedisCache(redis_client))
-            logger.info("Redis cache initialized successfully")
-        except Exception as e:
-            logger.warning(f"Could not set up Redis cache: {e}")
         os.environ["ALLOW_RESET"] = "TRUE"
         self.store = {}
         self.analytics = Analytics()
