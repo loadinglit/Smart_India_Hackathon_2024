@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import { Youtube, FileText, Link, FileSpreadsheet } from "lucide-react";
 import { useSpring, animated } from "@react-spring/web";
+import { useState } from "react";
 
 const AnimatedContainer = ({ isVisible, children }) => {
   const animation = useSpring({

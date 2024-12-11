@@ -6,7 +6,7 @@ import {
 const Welcome = () => {
   return (
     <div className="flex flex-col items-start max-w-4xl mx-auto mt-8 px-8 py-8">
-      <div className="w-16 h-16 relative mb-6">
+      <div className="w-16 h-16 mt-4 relative mb-6">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full animate-pulse"></div>
         <div className="absolute inset-1 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
           <div className="text-1xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">

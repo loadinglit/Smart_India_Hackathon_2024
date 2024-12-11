@@ -3,7 +3,7 @@ import DataTable from "./DataTable";
 
 const DataManagement = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ml-80 mt-24 ">
       <h2 className="text-2xl font-bold text-white">Data Management</h2>
       <div className="space-y-2">
         <h3 className="text-lg font-semibold text-white">Search and Filter</h3>

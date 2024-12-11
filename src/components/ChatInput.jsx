@@ -76,9 +76,7 @@ const ChatInterface = () => {
 
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 mb-16">
-        {" "}
-        {/* Added mb-16 for input spacing */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 mb-16"> {/* Added mb-16 for input spacing */}
         {messages.map((message, index) => (
           <div
             key={index}

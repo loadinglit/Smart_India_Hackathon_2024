@@ -231,7 +231,7 @@ const DataTable = () => {
   }
 
   return (
-    <div className="space-y-4 p-4">
+    <div className="space-y-4 p-4 ">
       {/* Modal for Content Viewing */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

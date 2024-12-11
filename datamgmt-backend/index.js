@@ -128,9 +128,9 @@ app.get("/api/pdf-files", async (req, res) => {
   try {
     const db = await connectToDatabase();
     const pdfsCollection = db.collection("pdfs");
-
+    
     const pdfDocuments = await pdfsCollection.find({}).toArray();
-
+    console.log(pdfDocuments);
     const pdfFiles = pdfDocuments.map((doc) => ({
       id: doc._id.toString(),
       filename: doc.originalName || doc.filename,

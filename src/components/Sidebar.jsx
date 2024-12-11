@@ -17,7 +17,7 @@ const Sidebar = ({ darkMode, toggleDarkMode }) => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { icon: Home, text: "Home", path: "/welcome" },
+    { icon: Home, text: "Home", path: "/" },
     { icon: MessageSquare, text: "Chats", path: "/chats" },
     { icon: Users, text: "Teams", path: "/teams" },
     { icon: BookOpen, text: "Knowledge Hub", path: "/knowledge-hub" },
