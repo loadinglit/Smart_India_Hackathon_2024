@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 import { Youtube, FileText, Link, FileSpreadsheet } from "lucide-react";
 import { useSpring, animated } from "@react-spring/web";
-import { useState } from "react";
+
 
 const AnimatedContainer = ({ isVisible, children }) => {
   const animation = useSpring({
@@ -59,12 +60,14 @@ const KnowledgeBaseForm = () => {
     try {
       const response = await fetch(
         "http://smart-india-hackathon-2024.onrender.com/admin/youtube/process-channel/",
+        
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ channel_handle: formData.youtubeUrl }),
+          credentials: 'include',
         }
       );
 
@@ -90,8 +93,10 @@ const KnowledgeBaseForm = () => {
 
     try {
       const response = await fetch("http://smart-india-hackathon-2024.onrender.com/admin/pdf/process-pdfs", {
+      
         method: "POST",
         body: formData,
+        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -131,8 +136,8 @@ const KnowledgeBaseForm = () => {
 
     const endpoint =
       urlMode === "single"
-        ? "http://smart-india-hackathon-2024.onrender.com/scrapy/scrape"  // Scraping endpoint
-        : "http://smart-india-hackathon-2024.onrender.com/scrapy/crawl";  // Crawling endpoint
+        ? "http://smart-india-hackathon-2024.onrender.com/admin/scrapy/scrape"  // Scraping endpoint
+        : "http://smart-india-hackathon-2024.onrender.com/admin/scrapy/crawl";  // Crawling endpoint
 
     try {
       setLoading(true);
@@ -245,7 +250,7 @@ const KnowledgeBaseForm = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white pl-60">
+    <div className="min-h-screen bg-black text-white">
       <form onSubmit={(e) => e.preventDefault()} className="space-y-6 p-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {inputFields.map((field) => (
@@ -263,7 +268,7 @@ const KnowledgeBaseForm = () => {
               }}
             >
               <div className="flex items-center justify-center">
-                <field.icon className="w-8 h-8 text-[#B026FF]" />
+                <field.icon className="w-8 h-8 text-[#d34dd2]" />
               </div>
               <h3 className="text-lg font-semibold text-center mt-2">
                 {field.label}
@@ -471,4 +476,3 @@ const KnowledgeBaseForm = () => {
 };
 
 export default KnowledgeBaseForm;
-                          

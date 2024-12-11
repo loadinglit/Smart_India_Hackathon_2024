@@ -4,7 +4,7 @@
 
 :root {
   --neon-purple: #b026ff;
-  --dark: #0a0a0a;
+  --dark: #000000;
 }
 
 body {
@@ -37,6 +37,10 @@ body {
   animation: spark 1s linear forwards;
   z-index: 9999;
 }
+.bg-dark {
+  --tw-bg-opacity: 1;
+  background-color: rgb(20, 0, 23);
+}
 
 @keyframes spark {
   0% {
@@ -47,4 +51,7 @@ body {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
   }
+}
+element.style {
+  color: black;
 }

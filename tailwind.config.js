@@ -7,6 +7,7 @@ export default {
   ],
   theme: {
     extend: {
+      
       colors: {
         'neon-purple': '#b026ff',
         'dark': '#0a0a0a',

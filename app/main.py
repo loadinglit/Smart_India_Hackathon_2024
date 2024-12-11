@@ -23,7 +23,7 @@ async def capture_user_ip(request: Request, call_next):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
-    allow_credentials="include",
+    allow_credentials=true,
     allow_methods=["*"],
     allow_headers=["*"],
 )

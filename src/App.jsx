@@ -7,7 +7,7 @@ import Process from './components/Process';
 import CodeDemo from './components/CodeDemo';
 import Pricing from './components/Pricing';
 import Footer from './components/Footer';
-import SparkleEffect from './components/SparkleEffect';
+// import SparkleEffect from './components/SparkleEffect';
 import Mentorship from './pages/Mentorship'; // Import Mentorship page
 import Contact from './pages/Contact';
 import Navbar from "./components/Navbar";
@@ -21,6 +21,7 @@ import Landing from './pages/Landing';
 import WelcomePage from './pages/WelcomePage';
 import KnowledgePage from './pages/KnowledgePage';
 import DataManagementPage from './pages/DatamanagemnentPage';
+import ParticlesBackground from './components/ParticlesBackground';
 
 
 function App() {
@@ -29,9 +30,9 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-dark">
-        <SparkleEffect />
         
         <main>
+          
           <Routes>
             {/* The home page and other sections */}
             <Route path='/' element ={<Landing></Landing>} />
@@ -44,6 +45,7 @@ function App() {
             <Route path="/datamanagement" element={<DataManagementPage></DataManagementPage>} />
           </Routes>
         </main>
+        
       </div>
     </Router>
   );
