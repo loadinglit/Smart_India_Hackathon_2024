@@ -17,10 +17,14 @@ import ChatHistory from "./components/ChatHistory";
 import ChatInput from "./components/ChatInput";
 import KnowledgeBase from "./components/KnowledgeBase";
 import DataManagement from "./components/DataManagement";
+import Landing from './pages/Landing';
+import WelcomePage from './pages/WelcomePage';
+import KnowledgePage from './pages/KnowledgePage';
+import DataManagementPage from './pages/DatamanagemnentPage';
 
 
 function App() {
-
+  
 
   return (
     <Router>
@@ -30,14 +34,14 @@ function App() {
         <main>
           <Routes>
             {/* The home page and other sections */}
-            <Route path="/" element={<><Header /><Hero /><CodeDemo /><Features /><Process /><Pricing /><Footer /></>} />
+            <Route path='/' element ={<Landing></Landing>} />
             {/* The contact page */}
             <Route path="/contact" element={<><Header /><Contact /><Footer /></>} />
             {/* The mentorship page */}
             <Route path="/mentorship" element={<><Header /><Mentorship /><Footer /></>} />
-            <Route path="/welcome" element={<><Navbar /><Sidebar/><Welcome /><ChatInput /></>} />
-            <Route path="/knowledge-hub" element={<><Navbar /><Sidebar/><KnowledgeBase /></>} />
-            <Route path="/datamanagement" element={<><Navbar /><DataManagement /><Sidebar></Sidebar></>} />
+            <Route path="/welcome" element={<WelcomePage></WelcomePage>} />
+            <Route path="/knowledge-hub" element={<KnowledgePage></KnowledgePage>} />
+            <Route path="/datamanagement" element={<DataManagementPage></DataManagementPage>} />
           </Routes>
         </main>
       </div>
