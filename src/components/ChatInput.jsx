@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon } from "lucide-react";
+import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon, Copy } from "lucide-react";
 
-const ChatInterface = () => {
+const ChatInterface = ({ onMessageSent }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isToggleOn, setIsToggleOn] = useState(false);
@@ -33,14 +33,17 @@ const ChatInterface = () => {
     setInput("");
     setIsLoading(true);
 
+    // Hide Welcome component when message is sent
+    onMessageSent();
+
     try {
       const userIp = await getIpAddress();
       const response = await fetch(
         "http://127.0.0.1:8000/rag/siva/query",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             user_query: input,
@@ -81,10 +84,17 @@ const ChatInterface = () => {
     setIsToggleOn((prev) => !prev);
   };
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(
+      () => alert("Message copied to clipboard!"),
+      (err) => console.error("Failed to copy text: ", err)
+    );
+  };
+
   return (
     <div className="flex flex-col h-full w-full chat-interface">
       <div className="flex-1 overflow-y-auto p-4 space-y-4 mb-16">
-        <div className="max-w-4xl mx-auto w-full px-4">
+        <div className="max-w-4xl mx-auto w-full px-4 pt-24">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -93,19 +103,27 @@ const ChatInterface = () => {
               } mb-4`}
             >
               <div
-                className={`message-container p-3 rounded-lg max-w-[70%] ${
+                className={`message-container pl-4 pr-4 pt-1 pb-1 rounded-xl max-w-[60%] ${
                   message.role === "user"
-                    ? "bg-blue-500 text-white ml-8"
-                    : "bg-gray-200 text-black mr-8"
+                    ? "bg-purple-900 text-white ml-8 h-[80%] flex items-center font-semibold"
+                    : " text-WHITE mr-8"
                 }`}
               >
                 {message.content}
+                <button
+                  onClick={() => copyToClipboard(message.content)}
+                  className="absolute bottom-2 right-2 p-1 bg-gray-700 rounded-full text-white hover:bg-gray-600"
+                >
+                  <Copy className="w-5 h-5" />
+                </button>
               </div>
             </div>
           ))}
           {isLoading && (
-            <div className="flex justify-start mb-4">
-              <div className="bg-gray-200 p-3 rounded-lg mr-8">Thinking...</div>
+            <div className="relative">
+              <span className="w-[10px] h-[10px] bg-[#FFFFFF] rounded-full absolute top-0 left-0 animate-blink"></span>
+              <span className="w-[10px] h-[10px] bg-[#FFFFFF] rounded-full absolute top-0 left-0 animate-blink delay-200 ml-[15px]"></span>
+              <span className="w-[10px] h-[10px] bg-[#FFFFFF] rounded-full absolute top-0 left-0 animate-blink delay-400 ml-[30px]"></span>
             </div>
           )}
           <div ref={messagesEndRef} />
@@ -126,7 +144,7 @@ const ChatInterface = () => {
             onKeyDown={handleKeyPress}
             placeholder="Ask Siva.AI..."
             disabled={isLoading}
-            className="w-full p-4 pl-12 pr-40 rounded-lg border border-gray-300 dark:border-gray-700 bg-black dark:bg-black text-gray-900 dark:text-gray-100 disabled:opacity-50"
+            className="w-full p-4 pl-12 pr-40 rounded-lg border border-gray-300 dark:border-gray-700 bg-black dark:bg-black text-gray-900 dark:text-gray-100 disabled:opacity-60"
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-2">
             <button
@@ -150,7 +168,7 @@ const ChatInterface = () => {
               disabled={!input.trim() || isLoading}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full disabled:opacity-50"
             >
-              <SendIcon className="w-6 h-6 text-gray-500" />
+              <SendIcon className="w-6 h-6 text-white" />
             </button>
           </div>
         </div>

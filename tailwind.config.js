@@ -7,7 +7,6 @@ export default {
   ],
   theme: {
     extend: {
-      
       colors: {
         'neon-purple': '#b026ff',
         'dark': '#0a0a0a',
@@ -16,6 +15,7 @@ export default {
         'gradient': 'gradient 8s linear infinite',
         'typing': 'typing 3.5s steps(40, end)',
         'fadeIn': 'fadeIn 0.5s ease-out forwards',
+        'blink': 'blink 1.5s infinite', // Add the custom blink animation here
       },
       keyframes: {
         gradient: {
@@ -26,6 +26,14 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        blink: {
+          '0%': { opacity: '.1' },
+          '20%': { opacity: '1' },
+          '100%': { opacity: '.1' },
+        },
+      },
+      spacing: {
+        'dot-width': '10px', // Add dot width for styling purposes
       },
     },
   },
