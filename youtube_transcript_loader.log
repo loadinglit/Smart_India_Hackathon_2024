@@ -210,3 +210,22 @@
 2024-12-11 10:21:12,610 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
 2024-12-11 10:21:13,079 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
 2024-12-11 10:21:13,845 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-11 12:02:44,403 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-11 12:02:44,929 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-11 12:02:46,029 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-11 12:09:32,838 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-11 12:09:33,330 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-11 12:09:33,788 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-11 12:09:34,085 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-11 12:09:35,648 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-11 12:09:37,324 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-11 12:09:38,959 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-11 12:09:39,037 - Siva.rag.rag.settings - INFO - Total tokens used: 679
+2024-12-11 12:09:39,420 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-11 12:09:39,421 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-11 12:27:06,133 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-11 12:27:06,589 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-11 12:27:07,256 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-11 13:15:40,685 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-11 13:15:41,421 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-11 13:15:42,238 - Siva.rag.rag.settings - INFO - Connected to MongoDB

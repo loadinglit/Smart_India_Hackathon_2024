@@ -34,3 +34,4 @@ context-python
 redis
 redisearch
 openpyxl
+unstructured

@@ -58,7 +58,7 @@ const KnowledgeBaseForm = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/youtube/process-channel/",
+        "http://smart-india-hackathon-2024.onrender.com/youtube/process-channel/",
         {
           method: "POST",
           headers: {
@@ -89,7 +89,7 @@ const KnowledgeBaseForm = () => {
     formData.append("pdf_file", file, file.name);
 
     try {
-      const response = await fetch("http://localhost:8000/pdf/process-pdfs", {
+      const response = await fetch("http://smart-india-hackathon-2024.onrender.com/admin/pdf/process-pdfs", {
         method: "POST",
         body: formData,
       });
@@ -131,8 +131,8 @@ const KnowledgeBaseForm = () => {
 
     const endpoint =
       urlMode === "single"
-        ? "http://localhost:8000/scrapy/scrape"  // Scraping endpoint
-        : "http://localhost:8000/scrapy/crawl";  // Crawling endpoint
+        ? "http://smart-india-hackathon-2024.onrender.com/scrapy/scrape"  // Scraping endpoint
+        : "http://smart-india-hackathon-2024.onrender.com/scrapy/crawl";  // Crawling endpoint
 
     try {
       setLoading(true);
@@ -245,7 +245,7 @@ const KnowledgeBaseForm = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white pl-60">
       <form onSubmit={(e) => e.preventDefault()} className="space-y-6 p-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {inputFields.map((field) => (

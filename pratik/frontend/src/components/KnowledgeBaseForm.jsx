@@ -57,7 +57,7 @@ const KnowledgeBaseForm = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/youtube/process-channel/",
+        "http://smart-india-hackathon-2024.onrender.com/admin/youtube/process-channel/",
         {
           method: "POST",
           headers: {
@@ -88,7 +88,7 @@ const KnowledgeBaseForm = () => {
     formData.append("pdf_file", file, file.name);
 
     try {
-      const response = await fetch("http://localhost:8000/pdf/process-pdfs", {
+      const response = await fetch("http://smart-india-hackathon-2024.onrender.com/admin/pdf/process-pdfs", {
         method: "POST",
         body: formData,
       });
@@ -130,8 +130,8 @@ const KnowledgeBaseForm = () => {
 
     const endpoint =
       urlMode === "single"
-        ? "http://localhost:8000/scrapy/scrape"  // Scraping endpoint
-        : "http://localhost:8000/scrapy/crawl";  // Crawling endpoint
+        ? "http://smart-india-hackathon-2024.onrender.com/admin/scrapy/scrape"  // Scraping endpoint
+        : "http://smart-india-hackathon-2024.onrender.com/admin/scrapy/crawl";  // Crawling endpoint
 
     try {
       setLoading(true);
