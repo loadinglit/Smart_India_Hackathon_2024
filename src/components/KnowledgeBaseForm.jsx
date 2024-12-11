@@ -58,7 +58,7 @@ const KnowledgeBaseForm = () => {
 
     try {
       const response = await fetch(
-        "http://smart-india-hackathon-2024.onrender.com/youtube/process-channel/",
+        "http://smart-india-hackathon-2024.onrender.com/admin/youtube/process-channel/",
         {
           method: "POST",
           headers: {
