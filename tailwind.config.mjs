@@ -6,6 +6,8 @@ export default {
       colors: {
         'neon-purple': '#b026ff',
         'dark': '#0a0a0a',
+        'customColor': 'rgb(27, 17, 34)',
+        'customcolor2': 'rgb(13, 8, 17)',
       },
       animation: {
         'gradient': 'gradient 8s linear infinite',

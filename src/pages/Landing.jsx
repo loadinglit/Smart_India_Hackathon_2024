@@ -7,17 +7,22 @@ import Process from '../components/Process';
 import Pricing from '../components/Pricing';
 
 import Footer from '../components/Footer';
+import ParticlesBackground from '../components/ParticlesBackground';
 
 function Landing(){
     return (
         <div>
+            
            <Header />
            <Hero />
            <CodeDemo />
            <Features />
            <Process />
-           <Pricing />
+           <br></br>
+           <br></br>
+           <br></br>
            <Footer />
+           
         </div>
     )
 }

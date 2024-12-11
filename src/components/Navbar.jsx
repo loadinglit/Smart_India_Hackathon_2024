@@ -3,7 +3,7 @@ import { Bell, LogIn } from 'lucide-react';
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 p-4 flex justify-between items-center z-50 border-b border-gray-200 dark:border-gray-700">
+    <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-black opacity-60 p-4 flex justify-between items-center z-50 ">
       <div className="flex items-center space-x-4">
         <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400">Siva.AI</h1>
       </div>

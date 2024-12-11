@@ -277,10 +277,10 @@ const DataTable = () => {
         <select
           value={filterType}
           onChange={(e) => setFilterType(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="All">All Types</option>
-          <option value="YouTube">YouTube Links</option>
+          <option value="YouTube" className="bg-black">YouTube Links</option>
           <option value="PDF">PDF Files</option>
         </select>
       </div>
@@ -294,7 +294,7 @@ const DataTable = () => {
           className="flex-grow px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">Select Type</option>
-          <option value="YouTube">YouTube</option>
+          <option value="YouTube" >YouTube</option>
           <option value="PDF">PDF</option>
         </select>
         <input
@@ -314,7 +314,7 @@ const DataTable = () => {
       </div>
 
       {/* Data Table */}
-      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <table className="min-w-full text-black bg-white shadow-md rounded-lg overflow-hidden">
         <thead className="bg-gray-100">
           <tr>
             <th className="px-4 py-2 text-left">Type</th>
