@@ -22,7 +22,7 @@ async def capture_user_ip(request: Request, call_next):
 # CORS settings for frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Modify this for production to restrict origins
+    allow_origins=["*"],  
     allow_credentials="include",
     allow_methods=["*"],
     allow_headers=["*"],

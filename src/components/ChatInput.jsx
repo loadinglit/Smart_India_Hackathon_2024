@@ -36,7 +36,7 @@ const ChatInterface = () => {
     try {
       const userIp = await getIpAddress();
       const response = await axios.post(
-        "http://127.0.0.1:8000/rag/siva/query",
+        "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
         {
           user_query: input,
           user_ip: userIp,
@@ -76,7 +76,9 @@ const ChatInterface = () => {
 
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 mb-16"> {/* Added mb-16 for input spacing */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 mb-16">
+        {" "}
+        {/* Added mb-16 for input spacing */}
         {messages.map((message, index) => (
           <div
             key={index}
