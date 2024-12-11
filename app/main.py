@@ -23,7 +23,7 @@ async def capture_user_ip(request: Request, call_next):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Modify this for production to restrict origins
-    allow_credentials=True,
+    allow_credentials="include",
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -32,7 +32,7 @@ app.add_middleware(
 app.include_router(admin_router, prefix="/admin", tags=["Admin Panel"])
 app.include_router(rag_router, prefix="/rag", tags=["RAG Chatbot"])
 
-   
+
 @app.get("/")
 async def root():
     return {"message": "Unified API for Admin Panel and RAG Chatbot"}
