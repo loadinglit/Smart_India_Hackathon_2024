@@ -159,7 +159,7 @@ const ChatInterface = ({ onMessageSent }) => {
             className="w-full p-4 pl-12 pr-40 rounded-lg border border-gray-300 dark:border-gray-700 bg-black dark:bg-black text-gray-900 dark:text-gray-100 disabled:opacity-60"
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-2">
-            <button
+            {/* <button
               onClick={toggleSwitch}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
             >
@@ -174,7 +174,7 @@ const ChatInterface = ({ onMessageSent }) => {
               disabled={isLoading}
             >
               <Mic className="w-8 h-6 text-gray-500" />
-            </button>
+            </button> */}
             <button
               onClick={handleSendMessage}
               disabled={!input.trim() || isLoading}

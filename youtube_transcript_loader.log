@@ -742,3 +742,108 @@
 2024-12-12 08:05:33,737 - Siva.rag.rag.settings - INFO - No timestamp found in the response.
 2024-12-12 08:05:33,799 - Siva.rag.rag.settings - INFO - Query data stored successfully
 2024-12-12 08:05:33,807 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 10:15:47,516 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 10:15:48,248 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 10:15:49,096 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 10:18:58,854 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2024-12-12 10:19:01,760 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Polish (auto-generated) for video WlJfikl9RGQ.
+2024-12-12 10:19:02,024 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_WlJfikl9RGQ.txt
+2024-12-12 10:19:02,923 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: 31y6GypmaVs
+2024-12-12 10:19:03,806 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: 1XHZU-kM_Tg
+2024-12-12 10:19:05,089 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_KB-AcVF57C4.txt
+2024-12-12 10:19:06,291 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_0PjtHQ6wEjA.txt
+2024-12-12 10:19:07,177 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video jv0VGcaKXpk.
+2024-12-12 10:19:07,419 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_jv0VGcaKXpk.txt
+2024-12-12 10:19:08,629 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_lXlA-9RiKVI.txt
+2024-12-12 10:19:09,806 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_ni82PheTESs.txt
+2024-12-12 10:19:10,959 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_ipHSiy9FWu4.txt
+2024-12-12 10:19:11,728 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: RR9Z5wnp_Y4
+2024-12-12 10:19:12,707 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: ul5cX9j32XE
+2024-12-12 10:19:13,701 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video 3dVoJYgWkn8.
+2024-12-12 10:19:14,154 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_3dVoJYgWkn8.txt
+2024-12-12 10:19:15,104 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video EuPzYpOwyfU.
+2024-12-12 10:19:15,625 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_EuPzYpOwyfU.txt
+2024-12-12 10:19:16,820 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: nfaGrs6zy4g
+2024-12-12 10:19:17,684 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: yqBttc4vb6s
+2024-12-12 10:19:18,979 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_7nJ2DrY6X9I.txt
+2024-12-12 10:19:19,785 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: uEMNWzT6guA
+2024-12-12 10:19:20,994 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_BpYudUZJu68.txt
+2024-12-12 10:19:21,709 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video bkCEK8qyf5w.
+2024-12-12 10:19:21,947 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_bkCEK8qyf5w.txt
+2024-12-12 10:19:22,769 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: J91ISBFLCzI
+2024-12-12 10:19:23,488 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video Vy4mbcELtxA.
+2024-12-12 10:19:23,722 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_Vy4mbcELtxA.txt
+2024-12-12 10:19:24,569 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Russian (auto-generated) for video 0JvkbYpjt_o.
+2024-12-12 10:19:24,846 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_0JvkbYpjt_o.txt
+2024-12-12 10:19:26,011 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_rj2IkbmcSUY.txt
+2024-12-12 10:19:26,824 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: E_hVKfw_prs
+2024-12-12 10:19:27,918 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video rDe3BHoQLAs.
+2024-12-12 10:19:28,158 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_rDe3BHoQLAs.txt
+2024-12-12 10:19:29,077 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video eIY2V2NXra4.
+2024-12-12 10:19:29,331 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_eIY2V2NXra4.txt
+2024-12-12 10:19:30,130 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video FmrFRR1miq4.
+2024-12-12 10:19:30,411 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_FmrFRR1miq4.txt
+2024-12-12 10:19:31,173 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video 0WGFj5i9IpE.
+2024-12-12 10:19:31,443 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_0WGFj5i9IpE.txt
+2024-12-12 10:19:32,656 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_dAHbve3Fyts.txt
+2024-12-12 10:19:33,409 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video xbULPFBzZ5c.
+2024-12-12 10:19:33,685 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_xbULPFBzZ5c.txt
+2024-12-12 10:19:34,426 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: P2GV86sWQVc
+2024-12-12 10:19:35,245 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video BC2abqFKNag.
+2024-12-12 10:19:35,496 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_BC2abqFKNag.txt
+2024-12-12 10:19:36,344 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video 9vZcRXMHx8c.
+2024-12-12 10:19:36,565 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_9vZcRXMHx8c.txt
+2024-12-12 10:19:37,352 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video p-fgymLD_iM.
+2024-12-12 10:19:37,699 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_p-fgymLD_iM.txt
+2024-12-12 10:19:38,911 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video X3v1TSOkv1s.
+2024-12-12 10:19:39,139 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_X3v1TSOkv1s.txt
+2024-12-12 10:19:39,987 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video Y_UP_AqErGk.
+2024-12-12 10:19:40,397 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_Y_UP_AqErGk.txt
+2024-12-12 10:19:41,474 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_vpHAQix6IMo.txt
+2024-12-12 10:19:42,686 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_GEy51DJ-vps.txt
+2024-12-12 10:19:43,982 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_5cijYQdPhrw.txt
+2024-12-12 10:19:44,880 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video ZsN4Rbez0t8.
+2024-12-12 10:19:45,326 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_ZsN4Rbez0t8.txt
+2024-12-12 10:19:46,623 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video dQPEO7FpUoU.
+2024-12-12 10:19:47,057 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_dQPEO7FpUoU.txt
+2024-12-12 10:19:47,847 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video JrfwJluVFm4.
+2024-12-12 10:19:48,139 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_JrfwJluVFm4.txt
+2024-12-12 10:19:49,101 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video 3QGVQwyXYQw.
+2024-12-12 10:19:49,337 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_3QGVQwyXYQw.txt
+2024-12-12 10:19:50,811 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_4dJUNQQcNdw.txt
+2024-12-12 10:19:51,640 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Arabic (auto-generated) for video HsDcc_m0bhI.
+2024-12-12 10:19:51,947 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_HsDcc_m0bhI.txt
+2024-12-12 10:19:53,026 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_-UgPwadWMSE.txt
+2024-12-12 10:19:54,269 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_pYRNICJqST8.txt
+2024-12-12 10:19:55,413 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: vT213VizkBQ
+2024-12-12 10:19:56,412 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video n51AdZkKqNo.
+2024-12-12 10:19:56,664 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_n51AdZkKqNo.txt
+2024-12-12 10:19:57,482 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video FL7ANTzGYvk.
+2024-12-12 10:19:57,734 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_FL7ANTzGYvk.txt
+2024-12-12 10:19:58,858 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_TSfBqBuV1Ro.txt
+2024-12-12 10:19:59,729 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: qR6wBC7wc_o
+2024-12-12 10:20:00,635 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video eDlZBQzghbw.
+2024-12-12 10:20:00,895 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_eDlZBQzghbw.txt
+2024-12-12 10:20:02,163 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_wgbHIUXpb7A.txt
+2024-12-12 10:20:03,081 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video tSXRJt2TgLc.
+2024-12-12 10:20:03,376 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_tSXRJt2TgLc.txt
+2024-12-12 10:20:04,433 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Korean (auto-generated) for video GNLwL67eRkg.
+2024-12-12 10:20:04,677 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_GNLwL67eRkg.txt
+2024-12-12 10:20:05,833 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_gTQAhZ8Rz6E.txt
+2024-12-12 10:20:07,079 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video j-ndWsPS-Cs.
+2024-12-12 10:20:07,384 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_j-ndWsPS-Cs.txt
+2024-12-12 10:20:08,217 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video SVef4p_GGPo.
+2024-12-12 10:20:08,461 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_SVef4p_GGPo.txt
+2024-12-12 10:20:09,387 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video 5UKCMDt1WAs.
+2024-12-12 10:20:09,794 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_5UKCMDt1WAs.txt
+2024-12-12 10:20:10,806 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: z4Vr4f843TM
+2024-12-12 10:20:11,609 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: lxglblWKmco
+2024-12-12 10:20:12,937 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_2DmUEFtZOhA.txt
+2024-12-12 10:20:14,040 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_n85xoZgNpqY.txt
+2024-12-12 10:20:14,811 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: ZW08BX7PgYo
+2024-12-12 10:20:14,908 - backend.app.services.youtube_service - INFO - Loaded 373 documents from output/Transcripts/
+2024-12-12 10:20:21,508 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 10:20:34,028 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 10:20:43,267 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 10:20:49,534 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 10:20:53,707 - backend.app.services.youtube_service - INFO - Documents added successfully in the Vector Database

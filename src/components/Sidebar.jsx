@@ -31,7 +31,7 @@ const Sidebar = ({ darkMode, toggleDarkMode }) => {
     <div className="fixed left-0 top-16 h-[calc(100vh-4rem)] flex">
       {isCollapsed ? null : (
         <div
-          className="bg-gray-50 dark:bg-black opacity-60 p-4 flex flex-col w-64 transition-all duration-300"
+          className="bg-gray-50 dark:bg-black opacity-80 p-4 flex flex-col w-64 transition-all duration-300"
         >
           <button
             className="w-full bg-black dark:bg-white text-white dark:text-black rounded-lg p-3 flex items-center justify-center mb-6"

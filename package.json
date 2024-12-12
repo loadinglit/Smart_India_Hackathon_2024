@@ -18,6 +18,7 @@
     "html-webpack-plugin": "^5.6.3",
     "lucide-react": "^0.468.0",
     "postcss": "^8.4.33",
+    "process": "^0.11.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intersection-observer": "^9.5.3",
