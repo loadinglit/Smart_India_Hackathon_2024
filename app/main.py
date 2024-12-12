@@ -22,7 +22,7 @@ async def capture_user_ip(request: Request, call_next):
 # CORS settings for frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://siva-ai-9ijl.onrender.com", "https://localhost:5173"],
+    allow_origins=["https://siva-ai-9ijl.onrender.com", "http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
