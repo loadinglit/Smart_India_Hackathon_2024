@@ -52,7 +52,7 @@ const ChatInterface = ({ onMessageSent }) => {
 
       // Send the POST request to the API
       const response = await axios.post(
-        "https://9ae5-117-96-43-108.ngrok-free.app/rag/siva/query",
+        "https://b2c9-117-96-43-108.ngrok-free.app/rag/siva/query",
         {
           user_query: input.trim(),
           user_ip: userIp,
