@@ -1395,3 +1395,6 @@
 2024-12-12 14:15:08,989 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
 2024-12-12 14:15:09,735 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
 2024-12-12 14:15:10,833 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:34:28,586 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:34:29,339 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:34:30,216 - Siva.rag.rag.settings - INFO - Connected to MongoDB
