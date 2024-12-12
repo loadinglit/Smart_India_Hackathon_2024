@@ -1,12 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',  // Add this line
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
-      colors:{
+      colors: {
         'neon-purple': '#b026ff',
         'dark': '#0a0a0a',
       },
@@ -14,7 +15,7 @@ export default {
         'gradient': 'gradient 8s linear infinite',
         'typing': 'typing 3.5s steps(40, end)',
         'fadeIn': 'fadeIn 0.5s ease-out forwards',
-        'blink': 'blink 1.5s infinite',
+        'blink': 'blink 1.5s infinite', // Add the custom blink animation here
       },
       keyframes: {
         gradient: {
@@ -38,4 +39,3 @@ export default {
   },
   plugins: [],
 }
-

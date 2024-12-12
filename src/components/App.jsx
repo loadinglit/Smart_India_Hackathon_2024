@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './Header';
+import Header from './components/layout/Header';
 import Mentorship from './pages/Mentorship';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
