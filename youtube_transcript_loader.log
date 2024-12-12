@@ -847,3 +847,6 @@
 2024-12-12 10:20:43,267 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
 2024-12-12 10:20:49,534 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
 2024-12-12 10:20:53,707 - backend.app.services.youtube_service - INFO - Documents added successfully in the Vector Database
+2024-12-12 10:45:45,548 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 10:45:46,055 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 10:45:47,162 - Siva.rag.rag.settings - INFO - Connected to MongoDB

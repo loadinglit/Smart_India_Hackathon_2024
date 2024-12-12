@@ -178,55 +178,79 @@ class ChatService:
             self.store[(user_id, conversation_id)] = InMemoryHistory()
         return self.store[(user_id, conversation_id)]
 
-    def query_transcripts(self, user_query: str):
-        try:
-            vector_store_manager = VectorStoreManager(URI=self.URI)
-            vectorstore = vector_store_manager._get_vector_store("SIH", "transcripts")
 
-            llm = self.models.azure_llm
-            prompt = self.prompts.get_timestamp_prompt()
-            document_chain = create_stuff_documents_chain(
-                llm, self.prompts.get_timestamp_prompt()
-            )
-            retriever = vectorstore.as_retriever(
-                search_type="similarity",
-                search_kwargs={"k": 3},
-            )
-            retrieval_chain = create_retrieval_chain(retriever, document_chain)
-            response = retrieval_chain.invoke({"input": user_query})
-            # pprint(response)
-            # pprint(response["answer"])
-            extracted_content = response["answer"]
-            if extracted_content.strip() == "-1":
-                logger.info("No timestamp found in the response.")
-                return {"yt_link": "None", "valid_timestamp": False}
+def query_transcripts(self, user_query: str):
+    try:
+        vector_store_manager = VectorStoreManager(URI=self.URI)
+        vectorstore = vector_store_manager._get_vector_store("SIH", "transcripts")
 
-            if ":" in extracted_content:
-                extracted_content = extracted_content.strip()
-            else:
-                total_seconds = int(extracted_content)
+        llm = self.models.azure_llm
+        prompt = self.prompts.get_timestamp_prompt()
+        document_chain = create_stuff_documents_chain(
+            llm, self.prompts.get_timestamp_prompt()
+        )
+        retriever = vectorstore.as_retriever(
+            search_type="similarity",
+            search_kwargs={"k": 3},
+        )
+        retrieval_chain = create_retrieval_chain(retriever, document_chain)
+        response = retrieval_chain.invoke({"input": user_query})
+
+        # Log the full response for debugging
+        logger.info(f"Retrieval Chain Response: {response}")
+
+        extracted_content = response["answer"]
+        if extracted_content.strip() == "-1":
+            logger.info("No timestamp found in the response.")
+            return {"yt_link": "None", "valid_timestamp": False}
+
+        if ":" in extracted_content:
+            extracted_content = extracted_content.strip()
+        else:
+            try:
+                total_seconds = int(float(extracted_content))
                 minutes = total_seconds // 60
                 seconds = total_seconds % 60
                 extracted_content = f"{minutes:02}:{seconds:02}"
+            except (ValueError, TypeError) as e:
+                logger.error(f"Error converting seconds: {e}")
+                return {"yt_link": "None", "valid_timestamp": False}
 
+        # Safely convert timestamp
+        try:
             sec = self.time_converter.convert_ts(extracted_content)
-
-            if sec is not None:
-                for doc in response["context"]:
-                    page_content = doc.page_content
-                    if extracted_content in page_content:
-                        yt_link = doc.metadata["yt_link"]
-
-                yt_link_with_timestamp = f"{yt_link}&t={sec}"
-                logger.info(f"YouTube Link with Timestamp: {yt_link_with_timestamp}")
-                return {"yt_link": yt_link_with_timestamp, "valid_timestamp": True}
-
-            logger.info("The timestamp conversion returned None.")
+        except ValueError as e:
+            logger.error(f"Timestamp conversion error: {e}")
             return {"yt_link": "None", "valid_timestamp": False}
 
-        except Exception as e:
-            logger.error(f"Error extracting timestamp: {e}")
-            raise
+        # Initialize yt_link as None before searching
+        yt_link = None
+
+        # Search for YouTube link in context documents
+        if sec is not None:
+            for doc in response.get("context", []):
+                page_content = doc.page_content
+                if extracted_content in page_content:
+                    yt_link = doc.metadata.get("yt_link")
+                    break
+
+            # Handle case where no link is found
+            if yt_link is None:
+                logger.warning("No YouTube link found in context documents")
+                return {"yt_link": "None", "valid_timestamp": False}
+
+            # Construct link with timestamp
+            yt_link_with_timestamp = f"{yt_link}&t={sec}"
+            logger.info(f"YouTube Link with Timestamp: {yt_link_with_timestamp}")
+            return {"yt_link": yt_link_with_timestamp, "valid_timestamp": True}
+
+        logger.info("The timestamp conversion returned None.")
+        return {"yt_link": "None", "valid_timestamp": False}
+
+    except Exception as e:
+        logger.error(f"Comprehensive error extracting timestamp: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        return {"yt_link": "None", "valid_timestamp": False}
 
     def chat(
         self,
