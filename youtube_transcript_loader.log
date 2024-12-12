@@ -1349,3 +1349,6 @@
 2024-12-12 14:05:48,549 - Siva.rag.rag.settings - INFO - Total tokens used: 4004
 2024-12-12 14:05:48,601 - Siva.rag.rag.settings - INFO - Query data stored successfully
 2024-12-12 14:05:48,603 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 14:06:34,293 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:06:35,034 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:06:35,947 - Siva.rag.rag.settings - INFO - Connected to MongoDB
