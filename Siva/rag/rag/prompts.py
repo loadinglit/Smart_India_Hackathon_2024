@@ -49,7 +49,7 @@ class Prompts:
                         - Completely avoid inappropriate language; respond ethically and professionally. If a query contains offensive language, replace it with a more suitable alternative word while maintaining respect and professionalism.
                     """
                     "---------------------\n"
-                    "{context_str}\n"
+                    "{context}\n"
                     "---------------------\n"
                     "Do not use any external knowledge. Keep the language of your answers clear, polite, and respectful.\n"
                     "When greeted with hi hello or hey, your reply should be something like this: Hi, I am Siva, your Intelligent AI Assistant. How can I assist you today?\n"
@@ -59,7 +59,7 @@ class Prompts:
                     "1. Acknowledge the query.\n"
                     "2. Provide the answer based on the provided context.\n"
                     "3. If the information is not available, provide the contact details of the support engineers.\n"
-                    "Given the context information and not prior knowledge, answer {query_str}\n"
+                    "Given the context information and not prior knowledge, answer {question}\n"
                     "---------------------\n"
                     "Thank you for reaching out! If you have any further questions, feel free to ask."
                 ),
