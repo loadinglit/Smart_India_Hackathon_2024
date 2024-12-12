@@ -1,58 +1,60 @@
-from Siva.rag.rag.settings import logger
+@staticmethod
+def convert_ts(ts: str) -> int:
+    """
+    Converts various timestamp formats to total seconds with robust handling.
 
+    Parameters
+    ----------
+    ts : str
+        A time string that can be:
+        - HH:MM:SS format
+        - MM:SS format
+        - Seconds as integer or float
+        - Decimal string representing seconds
 
-class TimeConverter:
-    @staticmethod
-    def convert_ts(ts: str) -> int:
-        """
-        Converts a time string to total seconds with enhanced float/decimal handling.
+    Returns
+    -------
+    int
+        Total number of seconds
+    """
+    try:
+        # Handle None or 'none' case
+        if ts is None or str(ts).lower() == "none":
+            return None
 
-        Parameters
-        ----------
-        ts : str
-            A time string in the format HH:MM:SS, MM:SS, or SS,
-            or a numeric string representing total seconds.
+        # Convert to string to handle potential numeric inputs
+        ts_str = str(ts).strip()
 
-        Returns
-        -------
-        int
-            The total number of seconds represented by the time string.
-
-        Raises
-        ------
-        ValueError
-            If the input string is not in a valid time format or cannot be converted.
-        """
+        # First, try handling float/decimal inputs
         try:
-            if ts is None or ts.lower() == "none":
-                return None
+            # If it's a decimal string, convert to integer seconds
+            if "." in ts_str:
+                return int(float(ts_str))
+        except ValueError:
+            pass
 
-            # Handle numeric strings (including floats)
-            try:
-                # First, try converting to float and then to int
-                if "." in ts:
-                    total_seconds = int(float(ts))
-                    minutes = total_seconds // 60
-                    seconds = total_seconds % 60
-                    return total_seconds
-            except ValueError:
-                pass
+        # Handle time format strings
+        try:
+            # Split the time string
+            time_parts = ts_str.split(":")
+            time_parts = [int(part) for part in time_parts]
 
-            # Original time format conversion logic
-            time_parts = list(map(int, ts.split(":")))
-
+            # Convert to total seconds based on number of parts
             if len(time_parts) == 3:
-                h, m, s = time_parts
+                return time_parts[0] * 3600 + time_parts[1] * 60 + time_parts[2]
             elif len(time_parts) == 2:
-                h, m, s = 0, time_parts[0], time_parts[1]
+                return time_parts[0] * 60 + time_parts[1]
             elif len(time_parts) == 1:
-                h, m, s = 0, 0, time_parts[0]
-            else:
-                raise ValueError("Invalid time format")
+                return time_parts[0]
 
-            total_seconds = h * 3600 + m * 60 + s
-            return total_seconds
+        except ValueError:
+            # If conversion fails, try direct integer/float conversion
+            try:
+                return int(float(ts_str))
+            except ValueError:
+                logger.error(f"Unable to convert timestamp: {ts}")
+                raise ValueError(f"Invalid timestamp format: {ts}")
 
-        except Exception as e:
-            logger.error(f"Error converting timestamp '{ts}': {e}")
-            raise ValueError(f"Error converting timestamp '{ts}': {e}")
+    except Exception as e:
+        logger.error(f"Comprehensive error converting timestamp '{ts}': {e}")
+        raise ValueError(f"Error converting timestamp '{ts}': {e}")
