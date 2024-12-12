@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon, Copy } from "lucide-react";
+import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon, Copy, User } from "lucide-react";
 import axios from "axios";
 
 const ChatInterface = ({ onMessageSent }) => {
@@ -7,7 +7,10 @@ const ChatInterface = ({ onMessageSent }) => {
   const [input, setInput] = useState("");
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [responseTime, setResponseTime] = useState(null);
   const messagesEndRef = useRef(null);
+  const startTimeRef = useRef(null);
+  const [copyMessage, setCopyMessage] = useState(""); // To handle the copy message
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -26,27 +29,49 @@ const ChatInterface = ({ onMessageSent }) => {
     }
   };
 
+  // Helper function to bold text appearing between ** **
+  const boldText = (content) => {
+    const parts = content.split(/(\*\*.*?\*\*)/);
+    return parts.map((part, index) =>
+      part.startsWith("**") && part.endsWith("**") ? (
+        <b key={index}>{part.slice(2, -2)}</b>
+      ) : (
+        part
+      )
+    );
+  };
+
+  const formatMessageContent = (content) => {
+    return content
+      .split(/[\n\r]+/)
+      .filter((line) => line.trim() !== "")
+      .map((line, index) => (
+        <div key={index}>{boldText(line.trim())}</div>
+      ));
+  };
+
   const handleSendMessage = async () => {
     if (!input.trim()) {
       console.error("Input is empty.");
       return;
     }
-  
-    const userMessage = { role: "user", content: input };
+
+    const userMessage = {
+      role: "user",
+      content: input,
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
 
-    // Hide Welcome component when message is sent
+    startTimeRef.current = Date.now();
     onMessageSent();
 
     try {
-      // Fetch the user's IP address
       const userIp = await getIpAddress();
-  
-      // Send the POST request to the API
       const response = await axios.post(
-        "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
+        "https://9ae5-117-96-43-108.ngrok-free.app/rag/siva/query",
         {
           user_query: input.trim(),
           user_ip: userIp,
@@ -55,35 +80,36 @@ const ChatInterface = ({ onMessageSent }) => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-          withCredentials: true, // Optional: Only if cookies/session are used
+          withCredentials: true,
         }
       );
-  
-      // Extract the response data
+
       const data = response.data;
-  
-      // Append the assistant's response to the chat messages
+      const endTime = Date.now();
+      const responseDuration = ((endTime - startTimeRef.current) / 1000).toFixed(2);
+      setResponseTime(responseDuration);
+
       const assistantMessage = {
         role: "assistant",
-        content: data.response || "No response received.",
+        content: `${data.response || "No response received."}`,
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
-  
-      // Append a default error message if the request fails
+
       const errorMessage = {
         role: "assistant",
         content: "Sorry, I could not process your request.",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
-  
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -98,44 +124,79 @@ const ChatInterface = ({ onMessageSent }) => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(
-      () => alert("Message copied to clipboard!"),
+      () => {
+        setCopyMessage("Copied!"); // Display the "Copied!" message
+        setTimeout(() => setCopyMessage(""), 3000); // Hide after 3 seconds
+      },
       (err) => console.error("Failed to copy text: ", err)
     );
   };
 
   return (
     <div className="flex flex-col h-full w-full chat-interface">
+      {/* Copy message display */}
+      {copyMessage && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-purple-700 text-white text-sm px-4 py-2 rounded-md">
+          {copyMessage}
+        </div>
+      )}
+
       <div className="flex-1 overflow-y-auto p-4 space-y-4 mb-16">
         <div className="max-w-4xl mx-auto w-full px-4 pt-24">
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              } mb-4`}
+              className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} mb-4 relative`}
             >
               <div
-                className={`message-container pl-4 pr-4 pt-1 pb-1 rounded-xl max-w-[60%] ${
-                  message.role === "user"
-                    ? "bg-purple-900 text-white ml-8 h-[80%] flex items-center font-semibold"
-                    : " text-WHITE mr-8"
+                className={`absolute top-0 ${message.role === "user" ? "right-[-40px]" : "left-[-40px]"}`}
+              >
+                {message.role === "user" ? (
+                  <User className="w-8 h-8 text-purple-700 rounded-full" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                    <span className="text-xs text-white font-bold">S</span>
+                  </div>
+                )}
+              </div>
+
+              <div
+                className={`message-container relative pl-4 pr-8 pt-3 pb-5 rounded-xl max-w-[60%] ${
+                  message.role === "user" ? "bg-purple-900 text-white" : "bg-gray-800 text-gray-200"
                 }`}
               >
-                {message.content}
+                <ul className="pr-6 list-disc">{formatMessageContent(message.content)}</ul>
+
+                <div
+                  className={`absolute bottom-1 right-2 text-xs ${
+                    message.role === "user" ? "text-purple-200" : "text-gray-400"
+                  }`}
+                >
+                  {message.timestamp}
+                  {message.role === "assistant" && responseTime && (
+                    <span className="ml-2">({responseTime}s)</span>
+                  )}
+                </div>
+
                 <button
                   onClick={() => copyToClipboard(message.content)}
-                  className="absolute bottom-2 right-2 p-1 bg-gray-700 rounded-full text-white hover:bg-gray-600"
+                  className="absolute top-1 right-1 p-1 rounded-full text-white hover:bg-gray-600"
                 >
-                  <Copy className="w-5 h-5" />
+                  <Copy className="w-4 h-4" />
                 </button>
               </div>
             </div>
           ))}
+
           {isLoading && (
-            <div className="relative">
-              <span className="w-[10px] h-[10px] bg-[#FFFFFF] rounded-full absolute top-0 left-0 animate-blink"></span>
-              <span className="w-[10px] h-[10px] bg-[#FFFFFF] rounded-full absolute top-0 left-0 animate-blink delay-200 ml-[15px]"></span>
-              <span className="w-[10px] h-[10px] bg-[#FFFFFF] rounded-full absolute top-0 left-0 animate-blink delay-400 ml-[30px]"></span>
+            <div className="flex justify-start ml-8 mt-4">
+              <div className="relative bg-gray-800 px-4 py-2 rounded-xl">
+                <div className="flex space-x-1">
+                  <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-white rounded-full animate-pulse delay-200"></span>
+                  <span className="w-2 h-2 bg-white rounded-full animate-pulse delay-400"></span>
+                </div>
+              </div>
             </div>
           )}
           <div ref={messagesEndRef} />
@@ -156,33 +217,15 @@ const ChatInterface = ({ onMessageSent }) => {
             onKeyDown={handleKeyPress}
             placeholder="Ask Siva.AI..."
             disabled={isLoading}
-            className="w-full p-4 pl-12 pr-40 rounded-lg border border-gray-300 dark:border-gray-700 bg-black dark:bg-black text-gray-900 dark:text-gray-100 disabled:opacity-60"
+            className="w-full p-4 pl-12 pr-20 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-800 text-white"
           />
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-2">
-            {/* <button
-              onClick={toggleSwitch}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-            >
-              {isToggleOn ? (
-                <ToggleRightIcon className="w-10 h-7 text-green-500" />
-              ) : (
-                <ToggleLeftIcon className="w-10 h-7 text-gray-500" />
-              )}
-            </button>
-            <button
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-              disabled={isLoading}
-            >
-              <Mic className="w-8 h-6 text-gray-500" />
-            </button> */}
-            <button
-              onClick={handleSendMessage}
-              disabled={!input.trim() || isLoading}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full disabled:opacity-50"
-            >
-              <SendIcon className="w-6 h-6 text-white" />
-            </button>
-          </div>
+          <button
+            onClick={handleSendMessage}
+            disabled={isLoading}
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-purple-500 rounded-full text-white hover:bg-purple-600"
+          >
+            <SendIcon className="w-6 h-6" />
+          </button>
         </div>
       </div>
     </div>
