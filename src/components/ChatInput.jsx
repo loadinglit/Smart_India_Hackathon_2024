@@ -73,8 +73,8 @@ const ChatInterface = ({ onMessageSent }) => {
 
       // Send the POST request to the API
       const response = await axios.post(
-        // "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
-            "http://127.0.0.1:8000/rag/siva/query",
+       "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
+           // "http://127.0.0.1:8000/rag/siva/query",
 
         {
           user_query: input.trim(),
