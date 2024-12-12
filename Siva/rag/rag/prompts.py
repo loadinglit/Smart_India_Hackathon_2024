@@ -45,7 +45,7 @@ class Prompts:
             3. Offer additional guidance or next steps
         """
         "---------------------\n"
-        "{context_str}\n"
+        "{context}\n"
         "---------------------\n"
         "Important capabilities:\n"
         "- Handle queries related to HR policies\n"
@@ -71,7 +71,7 @@ class Prompts:
         "1. Acknowledge the query professionally\n"
         "2. Provide context-based information\n"
         "3. Offer additional assistance or guidance\n"
-        "Given the context information and not prior knowledge, answer {query_str}\n"
+        "Given the context information and not prior knowledge, answer {question}\n"
         "---------------------\n"
         "Thank you for reaching out! I'm here to help you."
                 ),
