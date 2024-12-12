@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon, Copy } from "lucide-react";
+import axios from "axios";
 
 const ChatInterface = ({ onMessageSent }) => {
   const [messages, setMessages] = useState([]);
@@ -26,8 +27,11 @@ const ChatInterface = ({ onMessageSent }) => {
   };
 
   const handleSendMessage = async () => {
-    if (!input.trim()) return;
-
+    if (!input.trim()) {
+      console.error("Input is empty.");
+      return;
+    }
+  
     const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
@@ -37,32 +41,39 @@ const ChatInterface = ({ onMessageSent }) => {
     onMessageSent();
 
     try {
+      // Fetch the user's IP address
       const userIp = await getIpAddress();
-      const response = await fetch(
-        "http://127.0.0.1:8000/rag/siva/query",
+  
+      // Send the POST request to the API
+      const response = await axios.post(
+        "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
         {
-          method: "POST",
+          user_query: input.trim(),
+          user_ip: userIp,
+          db_name: "SIH",
+          collection_name: "pdfs",
+        },
+        {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            user_query: input,
-            user_ip: userIp,
-            db_name: "SIH",
-            collection_name: "pdfs",
-          }),
+          withCredentials: true, // Optional: Only if cookies/session are used
         }
       );
-
-      const data = await response.json();
+  
+      // Extract the response data
+      const data = response.data;
+  
+      // Append the assistant's response to the chat messages
       const assistantMessage = {
         role: "assistant",
-        content: data.response,
+        content: data.response || "No response received.",
       };
-
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
+  
+      // Append a default error message if the request fails
       const errorMessage = {
         role: "assistant",
         content: "Sorry, I could not process your request.",
@@ -72,6 +83,7 @@ const ChatInterface = ({ onMessageSent }) => {
       setIsLoading(false);
     }
   };
+  
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -147,7 +159,7 @@ const ChatInterface = ({ onMessageSent }) => {
             className="w-full p-4 pl-12 pr-40 rounded-lg border border-gray-300 dark:border-gray-700 bg-black dark:bg-black text-gray-900 dark:text-gray-100 disabled:opacity-60"
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-2">
-            <button
+            {/* <button
               onClick={toggleSwitch}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
             >
@@ -162,7 +174,7 @@ const ChatInterface = ({ onMessageSent }) => {
               disabled={isLoading}
             >
               <Mic className="w-8 h-6 text-gray-500" />
-            </button>
+            </button> */}
             <button
               onClick={handleSendMessage}
               disabled={!input.trim() || isLoading}

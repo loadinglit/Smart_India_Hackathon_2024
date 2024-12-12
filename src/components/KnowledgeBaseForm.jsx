@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Youtube, FileText, Link, FileSpreadsheet } from "lucide-react";
 import { useSpring, animated } from "@react-spring/web";
-
+import ParticlesBackground from "./ParticlesBackground";
 
 const AnimatedContainer = ({ isVisible, children }) => {
   const animation = useSpring({
@@ -59,14 +59,13 @@ const KnowledgeBaseForm = () => {
 
     try {
       const response = await fetch(
-        "http://smart-india-hackathon-2024.onrender.com/admin/youtube/process-channel/",
+        "https://smart-india-hackathon-2024.onrender.com/admin/youtube/process-channel/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ channel_handle: formData.youtubeUrl }),
-          credentials: 'include',
         }
       );
 
@@ -91,10 +90,9 @@ const KnowledgeBaseForm = () => {
     formData.append("pdf_file", file, file.name);
 
     try {
-      const response = await fetch("http://smart-india-hackathon-2024.onrender.com/admin/pdf/process-pdfs", {
+      const response = await fetch("https://smart-india-hackathon-2024.onrender.com/admin/pdf/process-pdfs", {
         method: "POST",
         body: formData,
-        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -134,8 +132,8 @@ const KnowledgeBaseForm = () => {
 
     const endpoint =
       urlMode === "single"
-        ? "http://smart-india-hackathon-2024.onrender.com/scrapy/scrape"  // Scraping endpoint
-        : "http://smart-india-hackathon-2024.onrender.com/scrapy/crawl";  // Crawling endpoint
+        ? "https://smart-india-hackathon-2024.onrender.com/admin/scrapy/scrape"  // Scraping endpoint
+        : "https://smart-india-hackathon-2024.onrender.com/admin/scrapy/crawl";  // Crawling endpoint
 
     try {
       setLoading(true);
@@ -238,23 +236,23 @@ const KnowledgeBaseForm = () => {
       type: "url",
       placeholder: "Enter website URL",
     },
-    {
-      name: "excelFile", 
-      icon: FileSpreadsheet,
-      label: "Excel Upload", 
-      type: "file",
-      placeholder: "Upload Excel File"
-    }
+    // {
+    //   name: "excelFile", 
+    //   icon: FileSpreadsheet,
+    //   label: "Excel Upload", 
+    //   type: "file",
+    //   placeholder: "Upload Excel File"
+    // }
   ];
 
   return (
-    <div className="min-h-screen bg-customcolor text-white pl-60 pt-12">
+    <div className="min-h-screen bg-customcolor text-white">
       <form onSubmit={(e) => e.preventDefault()} className="space-y-6 p-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-24">
           {inputFields.map((field) => (
             <div
               key={field.name}
-              className="bg-gray-800 p-6 rounded-lg shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg hover:bg-[#B026FF]"
+              className="bg-gray-800 p-6 rounded-lg shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg  hover:bg-[#1B1122]"
               onClick={() => {
                 setActiveInput(field.name);
                 if (field.name === "websiteUrl") {
@@ -266,7 +264,7 @@ const KnowledgeBaseForm = () => {
               }}
             >
               <div className="flex items-center justify-center">
-                <field.icon className="w-8 h-8 text-[#d34dd2]" />
+                <field.icon className="w-8 h-8 text-[#B026ff] " />
               </div>
               <h3 className="text-lg font-semibold text-center mt-2">
                 {field.label}
@@ -276,32 +274,36 @@ const KnowledgeBaseForm = () => {
         </div>
 
         <AnimatedContainer isVisible={activeInput !== null}>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md mt-6">
+          <div className="bg-gray-1000 p-6 rounded-lg shadow-md mt-6 w-1/2  mx-auto ">
             {activeInput === "youtubeUrl" && (
-              <div>
-                <label
-                  htmlFor="youtubeUrl"
-                  className="block text-sm font-medium text-gray-300 mb-2"
-                >
-                  YouTube URL
-                </label>
-                <input
-                  type="url"
-                  id="youtubeUrl"
-                  name="youtubeUrl"
-                  value={formData.youtubeUrl}
-                  onChange={handleInputChange}
-                  placeholder="Enter YouTube URL"
-                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white"
-                />
-                <button
-                  type="button"
-                  onClick={handleYouTubeSubmit}
-                  className="bg-[#B026FF] text-white py-2 px-6 rounded-lg shadow-md hover:bg-purple-800 transition duration-300 mt-4"
-                >
-                  Submit
-                </button>
+              <div className="flex justify-center w-full">
+              <div className="w-1/2 ">
+                <div> 
+                  <label 
+                    htmlFor="youtubeUrl" 
+                    className="block text-sm font-medium text-gray-300 mb-2" 
+                  > 
+                    YouTube URL 
+                  </label> 
+                  <input 
+                    type="url" 
+                    id="youtubeUrl" 
+                    name="youtubeUrl" 
+                    value={formData.youtubeUrl} 
+                    onChange={handleInputChange} 
+                    placeholder="Enter YouTube URL" 
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white" 
+                  /> 
+                  <button 
+                    type="button" 
+                    onClick={handleYouTubeSubmit} 
+                    className="bg-[#B026FF] text-white py-2 px-6 rounded-lg shadow-md hover:bg-purple-800  transition duration-300 mt-4" 
+                  > 
+                    Submit 
+                  </button> 
+                </div>
               </div>
+            </div>
             )}
 
             {activeInput === "pdfFile" && (
@@ -329,7 +331,7 @@ const KnowledgeBaseForm = () => {
               </div>
             )}
 
-            {activeInput === "excelFile" && (
+            {/* {activeInput === "excelFile" && (
               <div>
                 <label
                   htmlFor="excelFile"
@@ -353,7 +355,7 @@ const KnowledgeBaseForm = () => {
                   Upload
                 </button>
               </div>
-            )}
+            )} */}
 
             {activeInput === "websiteUrl" && (
               <div>
@@ -458,11 +460,11 @@ const KnowledgeBaseForm = () => {
               </div>
             )}
             {message && (
-              <div className="mt-4 p-3 bg-gray-700 rounded-md text-center">
+              <div className="mt-4 p-3 bg-gray-1000 text-green rounded-md text-center">
                 {loading ? (
-                  <div className="animate-pulse">{message}</div>
+                  <div className="animate-pulse ">{message}</div>
                 ) : (
-                  <p>{message}</p>
+                  <p className="text-green">{message}</p>
                 )}
               </div>
             )}
@@ -470,6 +472,7 @@ const KnowledgeBaseForm = () => {
         </AnimatedContainer>
       </form>
     </div>
+    
   );
 };
 
