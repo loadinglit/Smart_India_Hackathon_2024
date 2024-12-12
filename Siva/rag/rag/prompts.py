@@ -7,6 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.prompts import PromptTemplate
 import re  # Import regex for filtering bad language
 
+
 class Prompts:
     """
     A class to encapsulate prompt templates used in the application.
@@ -23,17 +24,29 @@ class Prompts:
         """
         self.bad_word_replacements = {
             "vacuous": "uninformed",
-            "moronic": "unwise",
-            "idiotic": "ill-considered",
-            "ridiculous": "absurd",
-            "brainlessly": "thoughtlessly",
-            "foolish": "ill-advised",
+            "moronic": "ill-judged",
+            "idiotic": "unthinking",
+            "ridiculous": "unreasonable",
+            "brainlessly": "recklessly",
+            "foolish": "ill-considered",
             "stupid": "misguided",
-            "nonsense": "unreasonable",
-            "clueless": "uninformed",
+            "nonsense": "irrationality",
+            "clueless": "oblivious",
             "absurdity": "incongruity",
+            "dumb": "uninformed",
+            "silly": "frivolous",
+            "naive": "overconfident",
+            "imprudent": "unwise",
+            "inept": "unqualified",
+            "mindless": "carefree",
+            "brainless": "unaware",
+            "senseless": "illogical",
+            "thoughtless": "carefree",
+            "dense": "misled",
+            "ignorant": "uninformed",
+            "witless": "unaware",
+            "unwise": "ill-advised",
         }
-
 
         self.prompt = ChatPromptTemplate.from_messages(
             [
@@ -83,8 +96,13 @@ class Prompts:
             The filtered text with inappropriate language replaced.
         """
         for bad_word, alternative in self.bad_word_replacements.items():
-            text = re.sub(r'\b' + re.escape(bad_word) + r'\b', alternative, text, flags=re.IGNORECASE)
-        
+            text = re.sub(
+                r"\b" + re.escape(bad_word) + r"\b",
+                alternative,
+                text,
+                flags=re.IGNORECASE,
+            )
+
         return text
 
     def get_filtered_prompt(self) -> str:
@@ -98,4 +116,3 @@ class Prompts:
         """
         raw_prompt = self.prompt.messages[0][1]  # Get the raw prompt message
         return self.replace_bad_language(raw_prompt)
-

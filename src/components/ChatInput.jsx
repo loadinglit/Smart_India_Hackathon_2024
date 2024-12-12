@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon, Copy, User } from "lucide-react";
+import {
+  ToggleLeftIcon,
+  ToggleRightIcon,
+  Mic,
+  SendIcon,
+  Copy,
+  User,
+} from "lucide-react";
 import axios from "axios";
 
 const ChatInterface = ({ onMessageSent }) => {
@@ -45,9 +52,7 @@ const ChatInterface = ({ onMessageSent }) => {
     return content
       .split(/[\n\r]+/)
       .filter((line) => line.trim() !== "")
-      .map((line, index) => (
-        <div key={index}>{boldText(line.trim())}</div>
-      ));
+      .map((line, index) => <div key={index}>{boldText(line.trim())}</div>);
   };
 
   const handleSendMessage = async () => {
@@ -59,7 +64,10 @@ const ChatInterface = ({ onMessageSent }) => {
     const userMessage = {
       role: "user",
       content: input,
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
@@ -70,12 +78,8 @@ const ChatInterface = ({ onMessageSent }) => {
 
     try {
       const userIp = await getIpAddress();
-
-      // Send the POST request to the API
       const response = await axios.post(
-       "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
-           // "http://127.0.0.1:8000/rag/siva/query",
-
+        "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
         {
           user_query: input.trim(),
           user_ip: userIp,
@@ -92,13 +96,19 @@ const ChatInterface = ({ onMessageSent }) => {
 
       const data = response.data;
       const endTime = Date.now();
-      const responseDuration = ((endTime - startTimeRef.current) / 1000).toFixed(2);
+      const responseDuration = (
+        (endTime - startTimeRef.current) /
+        1000
+      ).toFixed(2);
       setResponseTime(responseDuration);
 
       const assistantMessage = {
         role: "assistant",
         content: `${data.response || "No response received."}`,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
@@ -107,7 +117,10 @@ const ChatInterface = ({ onMessageSent }) => {
       const errorMessage = {
         role: "assistant",
         content: "Sorry, I could not process your request.",
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -150,10 +163,14 @@ const ChatInterface = ({ onMessageSent }) => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} mb-4 relative`}
+              className={`flex ${
+                message.role === "user" ? "justify-end" : "justify-start"
+              } mb-4 relative`}
             >
               <div
-                className={`absolute top-0 ${message.role === "user" ? "right-[-40px]" : "left-[-40px]"}`}
+                className={`absolute top-0 ${
+                  message.role === "user" ? "right-[-40px]" : "left-[-40px]"
+                }`}
               >
                 {message.role === "user" ? (
                   <User className="w-8 h-8 text-purple-700 rounded-full" />
@@ -166,14 +183,20 @@ const ChatInterface = ({ onMessageSent }) => {
 
               <div
                 className={`message-container relative pl-4 pr-8 pt-3 pb-5 rounded-xl max-w-[60%] ${
-                  message.role === "user" ? "bg-purple-900 text-white" : "bg-gray-800 text-gray-200"
+                  message.role === "user"
+                    ? "bg-purple-900 text-white"
+                    : "bg-gray-800 text-gray-200"
                 }`}
               >
-                <ul className="pr-6 list-disc">{formatMessageContent(message.content)}</ul>
+                <ul className="pr-6 list-disc">
+                  {formatMessageContent(message.content)}
+                </ul>
 
                 <div
                   className={`absolute bottom-1 right-2 text-xs ${
-                    message.role === "user" ? "text-purple-200" : "text-gray-400"
+                    message.role === "user"
+                      ? "text-purple-200"
+                      : "text-gray-400"
                   }`}
                 >
                   {message.timestamp}
