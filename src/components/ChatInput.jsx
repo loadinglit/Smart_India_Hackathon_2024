@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ToggleLeftIcon, ToggleRightIcon, Mic, SendIcon, Copy } from "lucide-react";
+import {
+  ToggleLeftIcon,
+  ToggleRightIcon,
+  Mic,
+  SendIcon,
+  Copy,
+} from "lucide-react";
 import axios from "axios";
 
 const ChatInterface = ({ onMessageSent }) => {
@@ -31,7 +37,7 @@ const ChatInterface = ({ onMessageSent }) => {
       console.error("Input is empty.");
       return;
     }
-  
+
     const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
@@ -43,10 +49,10 @@ const ChatInterface = ({ onMessageSent }) => {
     try {
       // Fetch the user's IP address
       const userIp = await getIpAddress();
-  
+
       // Send the POST request to the API
       const response = await axios.post(
-        "https://smart-india-hackathon-2024.onrender.com/rag/siva/query",
+        "https://9ae5-117-96-43-108.ngrok-free.app/rag/siva/query",
         {
           user_query: input.trim(),
           user_ip: userIp,
@@ -55,15 +61,15 @@ const ChatInterface = ({ onMessageSent }) => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           withCredentials: true, // Optional: Only if cookies/session are used
         }
       );
-  
+
       // Extract the response data
       const data = response.data;
-  
+
       // Append the assistant's response to the chat messages
       const assistantMessage = {
         role: "assistant",
@@ -72,7 +78,7 @@ const ChatInterface = ({ onMessageSent }) => {
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
-  
+
       // Append a default error message if the request fails
       const errorMessage = {
         role: "assistant",
@@ -83,7 +89,6 @@ const ChatInterface = ({ onMessageSent }) => {
       setIsLoading(false);
     }
   };
-  
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {

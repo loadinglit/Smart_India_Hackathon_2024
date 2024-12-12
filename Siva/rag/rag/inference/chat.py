@@ -318,17 +318,18 @@ class ChatService:
                 )
                 logger.info(f"Total tokens used: {cb.total_tokens}")
 
-            transcript_response = {"yt_link": "None", "valid_timestamp": False}
+            response = ""
+            # transcript_response = {"yt_link": "None", "valid_timestamp": False}
             if query_type == "informative":
-                transcript_response = self.query_transcripts(user_query)
-                yt_link = transcript_response["yt_link"]
-                if transcript_response["valid_timestamp"]:
-                    response = (
-                        f"{answer.content}\n\nYouTube video for reference: {yt_link}"
-                    )
-                else:
-                    response = answer.content
-            else:
+                # transcript_response = self.query_transcripts(user_query)
+                # yt_link = transcript_response["yt_link"]
+                # if transcript_response["valid_timestamp"]:
+                #     response = (
+                #         f"{answer.content}\n\nYouTube video for reference: {yt_link}"
+                #     )
+                # else:
+                #     response = answer.content
+
                 response = answer.content
 
             self.analytics.store_query_data(
