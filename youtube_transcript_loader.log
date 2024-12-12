@@ -658,3 +658,31 @@
 2024-12-12 01:32:52,683 - Siva.rag.rag.settings - INFO - No timestamp found in the response.
 2024-12-12 01:32:52,742 - Siva.rag.rag.settings - INFO - Query data stored successfully
 2024-12-12 01:32:52,744 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 03:48:10,522 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 03:48:10,985 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 03:48:11,929 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 04:28:44,574 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 04:28:45,290 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 04:28:46,222 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 06:48:34,050 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2024-12-12 06:48:36,817 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_6qSqrUIARiE.txt
+2024-12-12 06:48:37,518 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Kannada (auto-generated) for video _t4AM2PtKDM.
+2024-12-12 06:48:37,763 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript__t4AM2PtKDM.txt
+2024-12-12 06:48:38,545 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video FR_8pD538gw.
+2024-12-12 06:48:38,766 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_FR_8pD538gw.txt
+2024-12-12 06:48:39,465 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: oJeZO7W_Rgw
+2024-12-12 06:48:40,134 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: goc81nOiSPo
+2024-12-12 06:48:40,932 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: I5mXwPqPme0
+2024-12-12 06:48:41,668 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: 0CoeoIiS3ZU
+2024-12-12 06:48:42,385 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: WtluFLdwzus
+2024-12-12 06:48:43,127 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: OHUsGC1wyDY
+2024-12-12 06:48:43,776 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: RUQNyvk-s70
+2024-12-12 06:48:44,393 - backend.app.services.youtube_service - INFO - Fetching auto-generated transcript in Hindi (auto-generated) for video h2FCbBB33fs.
+2024-12-12 06:48:44,656 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_h2FCbBB33fs.txt
+2024-12-12 06:48:45,652 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_DFtAS1BCKvk.txt
+2024-12-12 06:48:46,596 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_VgJhjCPbORs.txt
+2024-12-12 06:48:47,227 - backend.app.services.youtube_service - WARNING - Transcripts disabled for video: o1j8eX7D8SQ
+2024-12-12 06:48:48,337 - backend.app.services.youtube_service - INFO - Transcript saved: output/Transcripts/transcript_WKfVzJSDAd8.txt
+2024-12-12 06:48:48,426 - backend.app.services.youtube_service - INFO - Loaded 94 documents from output/Transcripts/
+2024-12-12 06:48:55,314 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 06:49:00,945 - backend.app.services.youtube_service - INFO - Documents added successfully in the Vector Database

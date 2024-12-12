@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Youtube, FileText, Link, FileSpreadsheet } from "lucide-react";
 import { useSpring, animated } from "@react-spring/web";
 
-
 const AnimatedContainer = ({ isVisible, children }) => {
   const animation = useSpring({
     opacity: isVisible ? 1 : 0,
@@ -34,13 +33,16 @@ const KnowledgeBaseForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    
+
     // Special handling for exclude domains to split into array
     if (name === "excludeDomains") {
-      const domainsArray = value.split(',').map(domain => domain.trim()).filter(domain => domain !== "");
-      setFormData(prev => ({
+      const domainsArray = value
+        .split(",")
+        .map((domain) => domain.trim())
+        .filter((domain) => domain !== "");
+      setFormData((prev) => ({
         ...prev,
-        [name]: domainsArray
+        [name]: domainsArray,
       }));
       return;
     }
@@ -59,15 +61,13 @@ const KnowledgeBaseForm = () => {
 
     try {
       const response = await fetch(
-        "http://smart-india-hackathon-2024.onrender.com/admin/youtube/process-channel/",
-        
+        "https://smart-india-hackathon-2024.onrender.com/admin/youtube/process-channel/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ channel_handle: formData.youtubeUrl }),
-          credentials: 'include',
         }
       );
 
@@ -92,12 +92,13 @@ const KnowledgeBaseForm = () => {
     formData.append("pdf_file", file, file.name);
 
     try {
-      const response = await fetch("http://smart-india-hackathon-2024.onrender.com/admin/pdf/process-pdfs", {
-      
-        method: "POST",
-        body: formData,
-        credentials: 'include',
-      });
+      const response = await fetch(
+        "https://smart-india-hackathon-2024.onrender.com/admin/pdf/process-pdfs",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -123,10 +124,10 @@ const KnowledgeBaseForm = () => {
     // Prepare request body with proper formatting
     const requestBody = {
       url: formData.websiteUrl,
-      exclude_keywords: formData.excludeKeywords 
-        ? formData.excludeKeywords.split(',').map(kw => kw.trim())
+      exclude_keywords: formData.excludeKeywords
+        ? formData.excludeKeywords.split(",").map((kw) => kw.trim())
         : [],
-      exclude_domains: formData.excludeDomains || []
+      exclude_domains: formData.excludeDomains || [],
     };
 
     // Add depth limit for crawling mode
@@ -136,8 +137,8 @@ const KnowledgeBaseForm = () => {
 
     const endpoint =
       urlMode === "single"
-        ? "http://smart-india-hackathon-2024.onrender.com/admin/scrapy/scrape"  // Scraping endpoint
-        : "http://smart-india-hackathon-2024.onrender.com/admin/scrapy/crawl";  // Crawling endpoint
+        ? "https://smart-india-hackathon-2024.onrender.com/admin/scrapy/scrape" // Scraping endpoint
+        : "https://smart-india-hackathon-2024.onrender.com/admin/scrapy/crawl"; // Crawling endpoint
 
     try {
       setLoading(true);
@@ -174,18 +175,18 @@ const KnowledgeBaseForm = () => {
 
   const handleCSVFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    
+
     if (selectedFile) {
       const fileType = selectedFile.type;
-      const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
-  
+      const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
+
       // Ensure it's a CSV file
       if (fileType !== "text/csv" && fileExtension !== "csv") {
         alert("Please select a valid CSV file.");
         e.target.value = ""; // Clear the input
         return;
       }
-  
+
       setFile(selectedFile);
     }
   };
@@ -207,7 +208,6 @@ const KnowledgeBaseForm = () => {
         method: "POST",
         body: formData,
       });
-
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -241,12 +241,12 @@ const KnowledgeBaseForm = () => {
       placeholder: "Enter website URL",
     },
     {
-      name: "excelFile", 
+      name: "excelFile",
       icon: FileSpreadsheet,
-      label: "Excel Upload", 
+      label: "Excel Upload",
       type: "file",
-      placeholder: "Upload Excel File"
-    }
+      placeholder: "Upload Excel File",
+    },
   ];
 
   return (
@@ -268,7 +268,7 @@ const KnowledgeBaseForm = () => {
               }}
             >
               <div className="flex items-center justify-center">
-                <field.icon className="w-8 h-8 text-[#d34dd2]" />
+                <field.icon className="w-8 h-8 text-[#B026FF]" />
               </div>
               <h3 className="text-lg font-semibold text-center mt-2">
                 {field.label}
@@ -423,7 +423,7 @@ const KnowledgeBaseForm = () => {
                         type="text"
                         id="excludeDomains"
                         name="excludeDomains"
-                        value={formData.excludeDomains.join(', ')}
+                        value={formData.excludeDomains.join(", ")}
                         onChange={handleInputChange}
                         placeholder="e.g., example.com, test.com"
                         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white"
@@ -444,8 +444,8 @@ const KnowledgeBaseForm = () => {
                           value={formData.crawlLimit}
                           onChange={handleInputChange}
                           placeholder="Enter number of pages to crawl"
-                           className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white"
-                           />
+                          className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B026FF] text-white"
+                        />
                       </div>
                     )}
                     <button
