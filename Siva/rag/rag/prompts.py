@@ -1,11 +1,11 @@
 """
-prompts.py: This file will not be used in future versions of this package. Use LangSmith prompthub instead.
+This file contains the `Prompts` class used for generating and managing prompt templates.
+Future versions will not use this file; instead, refer to LangSmith's prompthub.
 """
 
 from typing import List, Tuple
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.prompts import PromptTemplate
-import re  # Import regex for filtering bad language
 
 
 class Prompts:
@@ -22,32 +22,6 @@ class Prompts:
         """
         Initializes the Prompts class with predefined prompt templates.
         """
-        self.bad_word_replacements = {
-            "vacuous": "uninformed",
-            "moronic": "ill-judged",
-            "idiotic": "unthinking",
-            "ridiculous": "unreasonable",
-            "brainlessly": "recklessly",
-            "foolish": "ill-considered",
-            "stupid": "misguided",
-            "nonsense": "irrationality",
-            "clueless": "oblivious",
-            "absurdity": "incongruity",
-            "dumb": "uninformed",
-            "silly": "frivolous",
-            "naive": "overconfident",
-            "imprudent": "unwise",
-            "inept": "unqualified",
-            "mindless": "carefree",
-            "brainless": "unaware",
-            "senseless": "illogical",
-            "thoughtless": "carefree",
-            "dense": "misled",
-            "ignorant": "uninformed",
-            "witless": "unaware",
-            "unwise": "ill-advised",
-        }
-
         self.prompt = ChatPromptTemplate.from_messages(
             [
                 (
@@ -60,6 +34,31 @@ class Prompts:
                         - Use natural and conversational language, incorporating interjections and expressions.
                         - Exhibit empathy and personalization to address the customer's issues effectively.
                         - Completely avoid inappropriate language; respond ethically and professionally. If a query contains offensive language, replace it with a more suitable alternative word while maintaining respect and professionalism.
+
+                    Replacement Rules for Offensive Words:
+                        "vacuous": "uninformed",
+                        "moronic": "ill-judged",
+                        "idiotic": "unthinking",
+                        "ridiculous": "unreasonable",
+                        "brainlessly": "recklessly",
+                        "foolish": "ill-considered",
+                        "stupid": "misguided",
+                        "nonsense": "irrationality",
+                        "clueless": "oblivious",
+                        "absurdity": "incongruity",
+                        "dumb": "uninformed",
+                        "silly": "frivolous",
+                        "naive": "overconfident",
+                        "imprudent": "unwise",
+                        "inept": "unqualified",
+                        "mindless": "carefree",
+                        "brainless": "unaware",
+                        "senseless": "illogical",
+                        "thoughtless": "carefree",
+                        "dense": "misled",
+                        "ignorant": "uninformed",
+                        "witless": "unaware",
+                        "unwise": "ill-advised"
                     """
                     "---------------------\n"
                     "{context}\n"
@@ -81,38 +80,13 @@ class Prompts:
             ]
         )
 
-    def replace_bad_language(self, text: str) -> str:
-        """
-        Replace bad language in the input text with better alternatives.
-
-        Parameters
-        ----------
-        text : str
-            The input text to filter.
-
-        Returns
-        -------
-        str
-            The filtered text with inappropriate language replaced.
-        """
-        for bad_word, alternative in self.bad_word_replacements.items():
-            text = re.sub(
-                r"\b" + re.escape(bad_word) + r"\b",
-                alternative,
-                text,
-                flags=re.IGNORECASE,
-            )
-
-        return text
-
     def get_filtered_prompt(self) -> str:
         """
-        Get the prompt with filtered bad language.
+        Get the prompt as defined.
 
         Returns
         -------
         str
-            The prompt string with bad language replaced.
+            The prompt string.
         """
-        raw_prompt = self.prompt.messages[0][1]  # Get the raw prompt message
-        return self.replace_bad_language(raw_prompt)
+        return self.prompt.messages[0][1]
