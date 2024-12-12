@@ -1,24 +1,17 @@
 from Siva.rag.rag.settings import logger
 
+
 class TimeConverter:
-    """
-    A utility class for converting time formats.
-
-    Methods
-    -------
-    convert_ts(ts: str) -> int
-        Converts a time string in the format HH:MM:SS, MM:SS, or SS to total seconds.
-    """
-
     @staticmethod
     def convert_ts(ts: str) -> int:
         """
-        Converts a time string to total seconds.
+        Converts a time string to total seconds with enhanced float/decimal handling.
 
         Parameters
         ----------
         ts : str
-            A time string in the format HH:MM:SS, MM:SS, or SS.
+            A time string in the format HH:MM:SS, MM:SS, or SS,
+            or a numeric string representing total seconds.
 
         Returns
         -------
@@ -34,8 +27,20 @@ class TimeConverter:
             if ts is None or ts.lower() == "none":
                 return None
 
+            # Handle numeric strings (including floats)
+            try:
+                # First, try converting to float and then to int
+                if "." in ts:
+                    total_seconds = int(float(ts))
+                    minutes = total_seconds // 60
+                    seconds = total_seconds % 60
+                    return total_seconds
+            except ValueError:
+                pass
+
+            # Original time format conversion logic
             time_parts = list(map(int, ts.split(":")))
-            
+
             if len(time_parts) == 3:
                 h, m, s = time_parts
             elif len(time_parts) == 2:
