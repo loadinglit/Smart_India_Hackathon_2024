@@ -1404,3 +1404,69 @@
 2024-12-12 14:41:39,500 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
 2024-12-12 14:41:40,163 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
 2024-12-12 14:41:40,977 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:44:11,258 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:44:11,873 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:44:14,853 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:47:23,154 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:47:23,926 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:47:24,537 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:47:24,955 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 14:47:27,515 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:47:29,418 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:47:31,301 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 14:47:31,408 - Siva.rag.rag.settings - INFO - Total tokens used: 707
+2024-12-12 14:47:31,781 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 14:47:31,783 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 14:57:35,403 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:57:36,168 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:57:37,200 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:57:51,166 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:57:51,991 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:57:52,838 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:57:53,569 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 14:57:55,484 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:57:57,550 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:57:58,794 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 14:57:58,903 - Siva.rag.rag.settings - INFO - Total tokens used: 810
+2024-12-12 14:57:59,309 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 14:57:59,310 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 14:59:08,016 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:59:09,140 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:59:10,113 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:59:10,685 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 14:59:12,003 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:59:12,918 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:59:28,397 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 14:59:28,400 - Siva.rag.rag.settings - INFO - Total tokens used: 659
+2024-12-12 14:59:28,453 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 14:59:28,454 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 14:59:46,231 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 14:59:46,922 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 14:59:47,515 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 14:59:47,861 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 14:59:49,110 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:59:49,943 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 14:59:51,248 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 14:59:51,253 - Siva.rag.rag.settings - INFO - Total tokens used: 741
+2024-12-12 14:59:51,310 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 14:59:51,310 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 15:01:31,746 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 15:01:33,185 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 15:01:34,552 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 15:01:35,060 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 15:01:36,525 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 15:01:37,414 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 15:01:39,339 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 15:01:39,354 - Siva.rag.rag.settings - INFO - Total tokens used: 862
+2024-12-12 15:01:39,505 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 15:01:39,506 - Siva.rag.rag.settings - INFO - Query processed successfully
+2024-12-12 15:02:03,031 - Siva.rag.rag.settings - INFO - Connected to MongoDB
+2024-12-12 15:02:03,685 - Siva.rag.rag.settings - INFO - Azure gpt-4o initialized
+2024-12-12 15:02:04,316 - Siva.rag.rag.settings - INFO - Azure text-embedding-3-small initialized
+2024-12-12 15:02:04,869 - Siva.rag.rag.settings - INFO - Vector store retrieved successfully
+2024-12-12 15:02:06,102 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 15:02:07,074 - httpx - INFO - HTTP Request: POST https://aas-eastus2-hub386797580333.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-12-12 15:02:08,698 - httpx - INFO - HTTP Request: POST https://aoai-triton-south-india.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview "HTTP/1.1 200 OK"
+2024-12-12 15:02:08,705 - Siva.rag.rag.settings - INFO - Total tokens used: 937
+2024-12-12 15:02:08,774 - Siva.rag.rag.settings - INFO - Query data stored successfully
+2024-12-12 15:02:08,775 - Siva.rag.rag.settings - INFO - Query processed successfully

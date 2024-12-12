@@ -318,9 +318,8 @@ class ChatService:
                 )
                 logger.info(f"Total tokens used: {cb.total_tokens}")
 
-            response = ""
             # transcript_response = {"yt_link": "None", "valid_timestamp": False}
-            if query_type == "informative":
+            # if query_type == "informative":
                 # transcript_response = self.query_transcripts(user_query)
                 # yt_link = transcript_response["yt_link"]
                 # if transcript_response["valid_timestamp"]:
@@ -330,7 +329,7 @@ class ChatService:
                 # else:
                 #     response = answer.content
 
-                response = answer.content
+            response = answer.content
 
             self.analytics.store_query_data(
                 user_query,
